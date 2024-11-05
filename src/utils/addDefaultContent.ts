@@ -1,5 +1,5 @@
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
-import { db } from '../firebase/config'
+import { db } from '../contexts/config'
 import defaultData from '../data/defaultData.json'
 import { getRandomIntFromInterval } from './getRandomIntFromInterval'
 import dayjs from 'dayjs'
