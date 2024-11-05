@@ -2,7 +2,7 @@ import { UserContext } from '../contexts/UserContext'
 //hooks
 import { useState, useContext } from 'react'
 //firebase
-import { auth } from '../firebase/config'
+import { auth } from '../contexts/config'
 import { signOut } from 'firebase/auth'
 
 export const useLogout = () => {

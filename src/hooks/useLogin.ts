@@ -5,7 +5,7 @@ import { useState, useContext } from 'react'
 //utils
 import { getErrorMessage } from '../utils/getErrorMessage'
 //firebase
-import { auth } from '../firebase/config'
+import { auth } from '../contexts/config'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 
 export const useLogin = () => {

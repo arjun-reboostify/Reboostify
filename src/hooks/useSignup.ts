@@ -7,7 +7,7 @@ import { useErrorPromptContext } from './useErrorPromptContext'
 import { openAppHelp } from '../utils/openAppHelp'
 import { getErrorMessage } from '../utils/getErrorMessage'
 //firebase
-import { auth } from '../firebase/config'
+import { auth } from '../contexts/config'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { addDefaultContent } from '../utils/addDefaultContent'
 

@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { useErrorPromptContext } from './useErrorPromptContext'
 //firebase
 import { addDoc, collection, deleteDoc, doc, updateDoc } from 'firebase/firestore'
-import { db } from '../firebase/config'
+import { db } from '../contexts/config'
 
 export const useDb = (col: string) => {
   const { user } = useContext(UserContext)
