@@ -19,12 +19,18 @@ import { WeekCal } from './pages/Calendar/WeekCal/WeekCal';
 import { MonthCal } from './pages/Calendar/MonthCal/MonthCal';
 import { NewGoalContextProvider } from './contexts/NewGoalContext';
 import HelloWorld from './it/Test';
+import Timer from './it/Timer';
+import Chat from './it/Chat'
+import Song from './it/Song'
+import Chatbot from './it/Chatbot'
+import Quote from './it/Quote'
 
 export function App() {
   const { user, authReady } = useContext(UserContext)
 
   return (
     <>
+    <Chatbot />
       {authReady && <>
         {user ?
           <DataContextProvider uid={user.uid}>
@@ -48,6 +54,12 @@ export function App() {
                 <Route index element={<Goals />}></Route>
               </Route>
               <Route path="Test" element={<HelloWorld />} />
+              <Route path="Timer" element={<Timer />} />
+              <Route path="Chat" element={<Chat />} />
+              <Route path="Song" element={<Song />} />
+              <Route path="Quote" element={<Quote />} />
+
+
               <Route path="*" element={<Navigate to='/Dashboard' replace />} />
             </Routes>
           </DataContextProvider>

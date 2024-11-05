@@ -74,10 +74,23 @@ export const Sidebar = () => {
                             <img src={monitoring} alt='Test' />
                             <span>Test</span>
                         </Link>
-                        <Link to='/Msg'>
-                            <img src={monitoring} alt='Test' />
-                            <span>Group Chat</span>
+                        <Link to='/Timer'>
+                            <img src={monitoring} alt='Timer' />
+                            <span>Timer</span>
                         </Link>
+                        <Link to='/Chat'>
+                            <img src={monitoring} alt='Chat' />
+                            <span>Chat</span>
+                        </Link>
+                        <Link to='/Song'>
+                            <img src={monitoring} alt='Song' />
+                            <span>Son</span>
+                        </Link>
+                        <Link to='/Quote'>
+                            <img src={monitoring} alt='Quote' />
+                            <span>Quote</span>
+                        </Link>
+                        
                     </nav>
                 </div>
                 <div className={styles.settings}>

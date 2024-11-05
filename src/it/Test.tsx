@@ -76,8 +76,7 @@ const HelloWorld: React.FC = () => {
   return (
     <Layout title='Test'>
         
-        <div className="w-full max-w-xl bg-black rounded-lg shadow-lg p-4 flex flex-col transition-all"
-                 style={{ maxHeight: urls.length > 0 ? "70vh" : "200px", overflowY: "auto" }}>
+       
                 <h3 className="text-white font-semibold mb-4">Colect and store websites at one place</h3>
                 <form onSubmit={addUrl} className="flex items-center mb-4">
                     <input
@@ -118,7 +117,7 @@ const HelloWorld: React.FC = () => {
                         <div ref={urlEndRef} />
                     </>
                 </main>
-            </div>
+          
 
 
     </Layout>

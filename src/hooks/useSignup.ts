@@ -4,12 +4,12 @@ import { useState } from 'react'
 import { useContext } from 'react'
 import { useErrorPromptContext } from './useErrorPromptContext'
 //utils
-import { openAppHelp } from '../utils/openAppHelp'
+
 import { getErrorMessage } from '../utils/getErrorMessage'
 //firebase
 import { auth } from '../contexts/config'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { addDefaultContent } from '../utils/addDefaultContent'
+
 
 export const useSignup = () => {
   const { dispatch } = useContext(UserContext)
@@ -20,9 +20,8 @@ export const useSignup = () => {
     setErrorMessage(null)
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        addDefaultContent(userCredential.user.uid)
         dispatch({ type: 'LOGIN', payload: userCredential.user })
-        openAppHelp()
+       
       })
       .catch((err) => {
         const message = getErrorMessage(err.code)

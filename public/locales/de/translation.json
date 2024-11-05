@@ -1,0 +1,59 @@
+{
+  "title": "Zeiter",
+  "focus": "Fokus",
+  "break": "Pause",
+  "longBreak": "Lange Pause",
+  "experimental": "experimentell",
+  "timer" : {
+    "start": "Starten",
+    "repeat": "Wiederholen",
+    "reset": "Zurücksetzen",
+    "stop": "Stoppen",
+    "sec": "sek",
+    "min": "min",
+    "hours": "h",
+    "overdue": "Zeit ist abgelaufen!"
+  },
+  "tasks": {
+    "add": "Aufgabe hinzufügen",
+    "new-task-placeholder": "Name der neuen Aufgabe",
+    "task-placeholder": "Name der Aufgabe"
+  },
+  "footer": {
+    "created": "Erstellt von",
+    "project": "Projekt finden auf"
+  },
+  "what": {
+    "button-tipp": "Was ist das?",
+    "title": "Was ist Pomodoro?",
+    "description": "Die Pomodoro-Technik ist eine Zeitmanagementmethode, die zur Verbesserung der Produktivität und Konzentration beiträgt. Die Technik beinhaltet das Aufteilen von Aufgaben in kleine, überschaubare Intervalle, die als Pomodoros bezeichnet werden und 25 Minuten dauern, gefolgt von kurzen Pausen von 5 Minuten.",
+    "steps-start": "Um die Pomodoro-Technik zu implementieren, folge diesen Schritten:",
+    "step-1": "Wählen Sie eine Aufgabe aus, an der Sie arbeiten möchten.",
+    "step-2": "Stellen Sie einen Timer für 25 Minuten ein, der als Pomodoro bezeichnet wird.",
+    "step-3": "Arbeite mit fokussierter Aufmerksamkeit an der Aufgabe, bis der Timer abläuft.",
+    "step-4": "Machen Sie eine kurze Pause von 5 Minuten.",
+    "step-5": "Wiederholen Sie den Vorgang für vier Pomodoros.",
+    "step-6": "Machen Sie nach Abschluss von vier Pomodoros eine längere Pause von 15 bis 30 Minuten.",
+    "step-7": "Wiederholen Sie den Zyklus nach Bedarf.",
+    "conclusion": "Durch konzentriertes Arbeiten in Intervallen und regelmäßige Pausen hilft die Pomodoro-Technik, die Konzentration zu verbessern, Aufschub zu bekämpfen und die Produktivität zu steigern."
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "duration-focus": "Fokusdauer:",
+    "duration-break": "Pausendauer:",
+    "duration-longBreak": "Pausendauer:",
+    "other": {
+      "title": "Andere",
+      "allowOverdue": "Timer überfällig zulassen",
+      "allowOverdueHint": "Nach 00:00 Uhr zählt der Timer die überfällige Zeit weiter",
+      "playAlarm": "Wecker abspielen",
+      "hideTitle": "Titel ausblenden"
+    }
+  },
+  "analytics" : {
+    "title": "Geschätzte Gesamtzeit",
+    "time-plot": "Zeit pro Tag",
+    "total-time": "Gesamtzeit",
+    "no-data": "Keine Daten"
+  }
+}
