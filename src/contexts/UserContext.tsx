@@ -1,6 +1,6 @@
 import { User } from "firebase/auth";
 import { createContext, ReactNode, useEffect, useReducer } from "react";
-import { auth } from '../../src/firebase/config'
+import { auth } from '../firebase/config';
 
 type ACTIONTYPE =
     | { type: "LOGIN"; payload: User }
