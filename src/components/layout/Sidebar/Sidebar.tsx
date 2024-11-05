@@ -74,6 +74,10 @@ export const Sidebar = () => {
                             <img src={monitoring} alt='Test' />
                             <span>Test</span>
                         </Link>
+                        <Link to='/Msg'>
+                            <img src={monitoring} alt='Test' />
+                            <span>Group Chat</span>
+                        </Link>
                     </nav>
                 </div>
                 <div className={styles.settings}>
