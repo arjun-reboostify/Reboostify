@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { Layout } from '../components/layout/Layout/Layout'
-import { db } from "../firebase/config";
+import { db } from "../contexts/config";
 import { collection, onSnapshot, addDoc, deleteDoc, doc, orderBy, query } from "firebase/firestore";
 interface UrlEntry {
     id: string;
