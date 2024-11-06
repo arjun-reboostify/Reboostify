@@ -22,10 +22,7 @@ export const Layout = ({ children, title }: LayoutProps) => {
             {isPending ?
                 <Loader /> :
                 <div className={styles.layoutContainer}>
-                    <header className={styles.header}>
-                        <h1>{title}</h1>
-                        <hr />
-                    </header>
+                  
                     <main>
                         {children}
                     </main>

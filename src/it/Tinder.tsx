@@ -66,9 +66,11 @@ const TinderClone = () => {
  
 
   return (<Layout title='Tinder'>
+   
 
    
       <div className="w-full h-screen max-w-md relative flex-grow">
+  
         {profiles.slice(currentIndex, currentIndex + 3).map((profile, index) => (
           <Draggable
             key={profile.id}
@@ -111,9 +113,7 @@ const TinderClone = () => {
                     <p className="text-sm mb-2">{profile.distance} miles away</p>
                     <p>{profile.bio}</p>
                     <p> Available 🟢</p>
-                    <Link to='/Make' className="font-bold text-white border-2 border-blue-500 bg-transparent hover:bg-blue-600 px-4 py-2 rounded inline-block">
-    <span>Tap here to send her message anonymously</span>
-</Link>
+                   
 <p> Swipe left or right for next match </p>
                   </div>
                   {swipeDirection === 'right' && (
@@ -126,7 +126,10 @@ const TinderClone = () => {
               </div>
             </div>
           </Draggable>
+          
         ))}
+        
+       
   
         <div className="mt-8">
           <p className="text-center text-gray-600">
@@ -135,6 +138,9 @@ const TinderClone = () => {
           <h1 className="text-center text-gray-600">workhard please</h1>
         </div>
       </div>
+      <div>    <Link to='/Make' className="font-bold text-white border-2 border-blue-500 bg-transparent hover:bg-blue-600 px-4 py-2 rounded inline-block">
+   Tap here to send her message anonymously
+</Link></div>
    </Layout>
     
   );
