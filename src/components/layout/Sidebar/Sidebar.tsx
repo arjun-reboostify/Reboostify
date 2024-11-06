@@ -55,6 +55,10 @@ export const Sidebar = () => {
                         <hr />
                     </span>
                     <nav>
+                    <Link to='/Road'>
+                            <img src={monitoring} alt='Road' />
+                            <span>PathYours</span>
+                        </Link>
                         <Link to='/Dashboard'>
                             <img src={home} alt='Dashboard' />
                             <span>Dashboard</span>
@@ -103,10 +107,7 @@ export const Sidebar = () => {
                             <img src={monitoring} alt='Quote' />
                             <span>Quote</span>
                         </Link>
-                        <Link to='/Quote'>
-                            <img src={monitoring} alt='Quote' />
-                            <span>Quote</span>
-                        </Link>
+                    
                        
                     </nav>
                 </div>

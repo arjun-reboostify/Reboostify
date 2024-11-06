@@ -62,16 +62,7 @@ const TinderClone = () => {
     setCurrentIndex(currentIndex + 1);
   };
 
-  if (currentIndex >= profiles.length) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-        <div className="bg-white rounded-lg shadow-lg p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">No more profiles!</h2>
-          <p className="text-gray-600">Check back later for more matches</p>
-        </div>
-      </div>
-    );
-  }
+ 
 
   return (<Layout title='Tinder'>
 
@@ -130,6 +121,7 @@ const TinderClone = () => {
           <p className="text-center text-gray-600">
             Liked: {likedProfiles.length} | Passed: {dislikedProfiles.length}
           </p>
+          <h1 className="text-center text-gray-600">workhard please</h1>
         </div>
       </div>
    </Layout>
