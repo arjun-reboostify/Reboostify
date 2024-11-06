@@ -50,12 +50,17 @@ const TinderClone = () => {
   ];
 
   useEffect(() => {
-    // Create a scrolling effect that continuously scrolls down
+    // Set up scrolling with a limit of 10% of the screen height
+    const scrollLimit = window.innerHeight * 0.2; // 10% of screen height
     const scrollInterval = setInterval(() => {
-      window.scrollBy(0, 1); // Scroll down by 1 pixel
-    }, 10); // Every 10 milliseconds
+      if (window.scrollY < scrollLimit) {
+        window.scrollBy(0, 1); // Scroll down by 1 pixel
+      } else {
+        clearInterval(scrollInterval); // Stop scrolling once the limit is reached
+      }
+    }, 10); // Scroll every 10 milliseconds
 
-    // Clear the interval when component unmounts
+    // Clear the interval when the component unmounts
     return () => clearInterval(scrollInterval);
   }, []);
 
@@ -130,7 +135,7 @@ const TinderClone = () => {
         </div>
       </div>
       <div>
-        <Link to='/Make' className="font-bold text-white border-2 border-blue-500 bg-transparent hover:bg-blue-600 px-4 py-2 rounded inline-block">
+        <Link to='/Chat' className="font-bold text-white border-2 border-blue-500 bg-transparent hover:bg-blue-600 px-4 py-2 rounded inline-block">
           Tap here to send her message anonymously
         </Link>
       </div>
