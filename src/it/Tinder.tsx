@@ -2,9 +2,11 @@ import { useState } from 'react';
 
 import Draggable from 'react-draggable';
 // Image imports
-import profile1 from './music/espresso.jpg';
+import profile1 from './img/yellow bikini.jpeg';
 import profile2 from './music/espresso.jpg';
+import { Layout } from '../components/layout/Layout/Layout'
 import profile3 from './music/espresso.jpg';
+
 
 
 
@@ -71,9 +73,10 @@ const TinderClone = () => {
     );
   }
 
-  return (
-    <div className="flex flex-col items-center min-h-screen bg-gray-100 pt-20 relative">
-      <div className="w-full max-w-md relative flex-grow" style={{ height: '500px' }}>
+  return (<Layout title='Tinder'>
+
+   
+      <div className="w-full h-screen max-w-md relative flex-grow">
         {profiles.slice(currentIndex, currentIndex + 3).map((profile, index) => (
           <Draggable
             key={profile.id}
@@ -97,12 +100,12 @@ const TinderClone = () => {
                 transform: `scale(${1 - index * 0.05}) translateY(${index * 10}px)`,
               }}
             >
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                <div className="relative">
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden h-full w-full">
+                <div className="relative h-full w-full">
                   <img
                     src={profile.image}
                     alt={`${profile.name}'s profile`}
-                    className="w-full h-96 object-cover"
+                    className="w-full h-full object-cover"
                   />
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-white">
                     <h2 className="text-2xl font-bold">
@@ -122,16 +125,17 @@ const TinderClone = () => {
             </div>
           </Draggable>
         ))}
-
+  
         <div className="mt-8">
           <p className="text-center text-gray-600">
             Liked: {likedProfiles.length} | Passed: {dislikedProfiles.length}
           </p>
         </div>
       </div>
-
-    </div>
+   </Layout>
+    
   );
+  
 };
 
 export default TinderClone;
