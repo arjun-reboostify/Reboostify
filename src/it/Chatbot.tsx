@@ -146,7 +146,7 @@ const SmartChatBot = () => {
   }, [messages]);
 
   return (
-    <div className="fixed bottom-4 right-4 z-[9999]">
+    <div className="fixed top-4 right-4 z-[9999]">
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none z-[9999]"
@@ -155,7 +155,7 @@ const SmartChatBot = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute bottom-16 right-0 w-96 bg-black rounded-lg shadow-xl z-[9999]">
+        <div className="absolute top-16 right-0 w-80 bg-black rounded-lg shadow-xl z-[9999]">
           <div className="h-96 flex flex-col">
             <div className="flex-1 overflow-y-auto p-4">
               {messages.map((message) => (

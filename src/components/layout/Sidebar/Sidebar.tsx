@@ -119,8 +119,8 @@ export const Sidebar = () => {
                     </button>
                     <nav>
                     <Link to='/Make'>
-                            <img src={home} alt='Make' />
-                            <span>Now</span>
+                           
+                            <span>👀Now</span>
                         </Link>
                         </nav>
                 </div>

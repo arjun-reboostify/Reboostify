@@ -85,7 +85,7 @@ const Chat: React.FC = () => {
         <Layout title='Chat'>
     
             
-                <h3 className="text-white font-semibold mb-4">Discussion/Hangout Room</h3>
+                <h3 className="text-white font-semibold mb-4">____Discussion/Hangout Room</h3>
                 <main className="flex-grow overflow-y-auto mb-4" style={{ maxHeight: "60vh" }}>
                     {user && (
                         <>
