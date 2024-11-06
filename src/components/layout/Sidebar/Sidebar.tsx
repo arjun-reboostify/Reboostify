@@ -17,7 +17,7 @@ import styles from './Sidebar.module.scss'
 //components
 import { Link } from 'react-router-dom';
 
-
+    ``
 // Import statements remain unchanged
 
 export const Sidebar = () => {
@@ -95,9 +95,9 @@ export const Sidebar = () => {
                             <img src={monitoring} alt='Quote' />
                             <span>Quotw</span>
                         </Link>
-                        <Link to='/Quote'>
-                            <img src={monitoring} alt='Quote' />
-                            <span>Quote</span>
+                        <Link to='/Tinder'>
+                            <img src={monitoring} alt='Tinder' />
+                            <span>Tinder</span>
                         </Link>
                         <Link to='/Quote'>
                             <img src={monitoring} alt='Quote' />

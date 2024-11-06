@@ -26,6 +26,7 @@ import Chatbot from './it/Chatbot'
 import Quote from './it/Quote'
 import Hope from './it/hope'
 import Chance from './it/chance'
+import Tinder from './it/Tinder'
 
 export function App() {
   const { user, authReady } = useContext(UserContext)
@@ -62,7 +63,7 @@ export function App() {
               <Route path="Chat" element={<Chat />} />
               <Route path="Song" element={<Song />} />
               <Route path="Quote" element={<Quote />} />
-
+              <Route path="Tinder" element={<Tinder />} />
 
               <Route path="*" element={<Navigate to='/Dashboard' replace />} />
             </Routes>
