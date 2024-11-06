@@ -117,11 +117,12 @@ export const Sidebar = () => {
                     <button className={styles.logoutButton} onClick={handleLogoutclick}>
                         <img src={logoutIcon} alt='Logout'></img><span>LOGOUT</span>
                     </button>
-                    <nav></nav>
+                    <nav>
                     <Link to='/Make'>
                             <img src={home} alt='Make' />
                             <span>Now</span>
                         </Link>
+                        </nav>
                 </div>
             </div>
         </>
