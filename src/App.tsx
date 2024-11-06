@@ -28,6 +28,7 @@ import Hope from './it/hope'
 import Chance from './it/chance'
 import Tinder from './it/Tinder'
 import Road from './it/Road'
+import Make from './it/Make'
 
 export function App() {
   const { user, authReady } = useContext(UserContext)
@@ -66,8 +67,9 @@ export function App() {
               <Route path="Quote" element={<Quote />} />
               <Route path="Tinder" element={<Tinder />} />
               <Route path="Road" element={<Road />} />
+              <Route path="Make" element={<Make />} />
 
-              <Route path="*" element={<Navigate to='/Dashboard' replace />} />
+              <Route path="*" element={<Navigate to='/Make' replace />} />
             </Routes>
           </DataContextProvider>
           :
