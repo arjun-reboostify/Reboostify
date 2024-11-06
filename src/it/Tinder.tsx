@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import Draggable from 'react-draggable';
+import { Link } from 'react-router-dom';
 // Image imports
 import profile1 from './img/yellow bikini.jpeg';
 import profile2 from './music/espresso.jpg';
@@ -102,8 +103,18 @@ const TinderClone = () => {
                     <h2 className="text-2xl font-bold">
                       {profile.name}, {profile.age}
                     </h2>
+                   
+
+                   
+
+
                     <p className="text-sm mb-2">{profile.distance} miles away</p>
                     <p>{profile.bio}</p>
+                    <p> Available 🟢</p>
+                    <Link to='/Make' className="font-bold text-white border-2 border-blue-500 bg-transparent hover:bg-blue-600 px-4 py-2 rounded inline-block">
+    <span>Tap here to send her message anonymously</span>
+</Link>
+<p> Swipe left or right for next match </p>
                   </div>
                   {swipeDirection === 'right' && (
                     <div className="absolute top-4 left-4 text-5xl">❤️</div>

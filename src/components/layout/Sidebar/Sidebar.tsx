@@ -55,10 +55,7 @@ export const Sidebar = () => {
                         <hr />
                     </span>
                     <nav>
-                    <Link to='/Make'>
-                            <img src={home} alt='Make' />
-                            <span>Now</span>
-                        </Link>
+                   
                     <Link to='/Road'>
                             <img src={monitoring} alt='Road' />
                             <span>PathYours</span>
@@ -111,6 +108,7 @@ export const Sidebar = () => {
                             <img src={monitoring} alt='Quote' />
                             <span>Quote</span>
                         </Link>
+
                     
                        
                     </nav>
@@ -119,6 +117,11 @@ export const Sidebar = () => {
                     <button className={styles.logoutButton} onClick={handleLogoutclick}>
                         <img src={logoutIcon} alt='Logout'></img><span>LOGOUT</span>
                     </button>
+                    <nav></nav>
+                    <Link to='/Make'>
+                            <img src={home} alt='Make' />
+                            <span>Now</span>
+                        </Link>
                 </div>
             </div>
         </>
