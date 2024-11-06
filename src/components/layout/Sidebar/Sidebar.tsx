@@ -18,6 +18,8 @@ import styles from './Sidebar.module.scss'
 import { Link } from 'react-router-dom';
 
 
+// Import statements remain unchanged
+
 export const Sidebar = () => {
     const { logout } = useLogout()
     const [toggleSidebar, setToggleSidebar] = useState(false)
@@ -43,7 +45,10 @@ export const Sidebar = () => {
                 className={`${styles.toggleSidebar} ${toggleSidebar ? styles.toggled : ''}`}>
                 <img src={menu} alt={'toggle menu'} />
             </button>
-            <div className={` ${toggleSidebar && styles.sideBarOpen} ${styles.container}`} ref={sidebarPanelRef}>
+            <div
+                className={`${toggleSidebar && styles.sideBarOpen} ${styles.container} overflow-y-auto h-screen`}
+                ref={sidebarPanelRef}
+            >
                 <div>
                     <span className={styles.logo}>
                         Task<br /> Manager
@@ -84,17 +89,28 @@ export const Sidebar = () => {
                         </Link>
                         <Link to='/Song'>
                             <img src={monitoring} alt='Song' />
-                            <span>Son</span>
+                            <span>Song</span>
+                        </Link>
+                        <Link to='/Quote'>
+                            <img src={monitoring} alt='Quote' />
+                            <span>Quotw</span>
                         </Link>
                         <Link to='/Quote'>
                             <img src={monitoring} alt='Quote' />
                             <span>Quote</span>
                         </Link>
-                        
+                        <Link to='/Quote'>
+                            <img src={monitoring} alt='Quote' />
+                            <span>Quote</span>
+                        </Link>
+                        <Link to='/Quote'>
+                            <img src={monitoring} alt='Quote' />
+                            <span>Quote</span>
+                        </Link>
+                       
                     </nav>
                 </div>
                 <div className={styles.settings}>
-                    
                     <button className={styles.logoutButton} onClick={handleLogoutclick}>
                         <img src={logoutIcon} alt='Logout'></img><span>LOGOUT</span>
                     </button>

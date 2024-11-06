@@ -24,12 +24,16 @@ import Chat from './it/Chat'
 import Song from './it/Song'
 import Chatbot from './it/Chatbot'
 import Quote from './it/Quote'
+import Hope from './it/hope'
+import Chance from './it/chance'
 
 export function App() {
   const { user, authReady } = useContext(UserContext)
 
   return (
     <>
+    <Hope />
+    <Chance />
     <Chatbot />
       {authReady && <>
         {user ?
