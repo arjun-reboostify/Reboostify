@@ -105,9 +105,9 @@ export const Sidebar = () => {
                             <img src={monitoring} alt='Tinder' />
                             <span>Tinder</span>
                         </Link>
-                        <Link to='/Quote'>
-                            <img src={monitoring} alt='Quote' />
-                            <span>Quote</span>
+                        <Link to='/Note'>
+                            <img src={monitoring} alt='Note' />
+                            <span>Note</span>
                         </Link>
 
                     
