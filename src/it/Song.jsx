@@ -1,21 +1,21 @@
 import { useState, useRef, useEffect } from 'react';
 import { Layout } from '../components/layout/Layout/Layout';
 import track1 from './music/Espresso.mp3';
-import track2 from './music/Espresso.mp3';
+import track2 from './music/Escaping Forever.mp3';
 import track3 from './music/Espresso.mp3';
 import track4 from './music/Espresso.mp3';
 import coverImage from './music/espresso.jpg';
 
 const songsList = [
   { 
-    name: 'hans zimmer', 
-    artist: 'interstellar theme', 
+    name: 'Sabrina Carpenter', 
+    artist: 'Espresso', 
     src: track1, 
     cover: coverImage 
   },
   { 
     name: 'narvent', 
-    artist: 'Fainted', 
+    artist: 'Escaping Forever', 
     src: track2, 
     cover: coverImage 
   },
