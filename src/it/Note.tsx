@@ -28,6 +28,7 @@ const NoteApp: React.FC = () => {
     color: '#000000',
     lineWidth: 2,
   });
+  const [isScrollLocked, setIsScrollLocked] = useState(false);
 
   useEffect(() => {
     if (editingNoteId !== null) {
@@ -124,6 +125,7 @@ const NoteApp: React.FC = () => {
   };
 
   const handleDrawingStart = (e: React.MouseEvent<HTMLCanvasElement, MouseEvent> | React.TouchEvent<HTMLCanvasElement>) => {
+    setIsScrollLocked(true);
     setIsDrawing(true);
     const canvas = canvasRef.current;
     if (canvas) {
@@ -138,6 +140,7 @@ const NoteApp: React.FC = () => {
   };
 
   const handleDrawingEnd = () => {
+    setIsScrollLocked(false);
     setIsDrawing(false);
     setLastPos(null);
   };
@@ -243,6 +246,12 @@ const NoteApp: React.FC = () => {
                   className="bg-red-500 hover:bg-red-600 text-white rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                 >
                   Clear
+                </button>
+                <button
+                  onClick={() => setIsScrollLocked((prev) => !prev)}
+                  className={`bg-gray-500 hover:bg-gray-600 text-white rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-gray-500 ${isScrollLocked ? 'bg-gray-600' : ''}`}
+                >
+                  {isScrollLocked ? 'Unlock Scroll' : 'Lock Scroll'}
                 </button>
               </div>
             )}
