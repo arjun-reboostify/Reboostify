@@ -6,8 +6,8 @@ import { Quote, ArrowRight } from 'lucide-react';
 const QuoteBox = () => {
   const quotes = [
     {
-      text: "Mind is above all, Mind is everything, it interprets this immediate reality too, it can also think the non existent",
-      author: "Ancient Philosophy"
+      text: "until death all defeats are psychological",
+      author: "fact"
     },
     {
       text: "It is not the man who has too little, but the man who craves more, that is poor",
