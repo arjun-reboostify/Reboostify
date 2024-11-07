@@ -58,7 +58,7 @@ const TinderClone = () => {
       } else {
         clearInterval(scrollInterval); // Stop scrolling once the limit is reached
       }
-    }, 10); // Scroll every 10 milliseconds
+    }, 3); // Scroll every 10 milliseconds
 
     // Clear the interval when the component unmounts
     return () => clearInterval(scrollInterval);

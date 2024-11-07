@@ -44,11 +44,61 @@ const TodoList: React.FC = () => {
   const removeTodo = (id: number) => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
-
+  const points = [
+    {
+      title: "Face Your Demons",
+      text: "Now or never - dump all the demons and face it relentlessly. This will prove you have uplifted from materialism and pleasureness to achieve greatness.",
+      icon: "🔥"
+    },
+    {
+      title: "Beyond Reality",
+      text: "You are all in the fake reality game interpreted by the mind. It's just a tool to help you face demons.",
+      icon: "🧠"
+    },
+    {
+      title: "Victory Over Self",
+      text: "It's not about beating somebody else but victory over myself by going to war with myself each and every second.",
+      icon: "⚔️"
+    },
+    {
+      title: "Normsl as Breathing",
+      text: "Just like breathing is normal and we don't even know we're doing it, that is how we have to live our life. we have to suffer every bit of seconds till the point it feels normal and don't even know that we are doing it That is how we find peace with ourselves.",
+      icon: "🌬️"
+    },
+    {
+      title: "Embrace the Pain",
+      text: "Stop thinking, make mind numb and most importantly let me enjoy the pain. Do it right now to beat the uncertainty.",
+      icon: "💪"
+    },
+    {
+      title: "Mind is Everything",
+      text: "Always remember mind is above all. Mind is everything. The Creator has given you two choices as an elimination process.",
+      icon: "✨"
+    },
+    {
+      title: "The Choice",
+      text: "Either face demons relentlessly transcending limits for a greater purpose, or indulge in worldly things. The choice is yours.",
+      icon: "⚖️"
+    },
+    {
+      title: "Divine Love",
+      text: "Krishna said in Bhagavad Gita that he loves and enjoys seeing a person sacrificing. The more you sacrifice your identity for the greater purpose, the more likely you are to live in heaven.",
+      icon: "🙏"
+    },
+    {
+      title: "Power of Belief",
+      text: "Pray and believe because belief is everything as it is rendered by the mind itself.",
+      icon: "⭐"
+    },
+    {
+      title: "Embrace the Journey",
+      text: "Don't worry - what has to happen will definitely happen in future even if it's death. Stop worrying and redirect your mind to suffering and enjoy every bit of it NOW!",
+      icon: "🚀"
+    }
+  ];
   return (
     <Layout title='Make'>
    
-      <h1 className="text-center text-2xl font-bold text-white mb-6">Now or Never Dump all the demons and face it relentlessly this will prove that you have up lifted from this materialism and pleasureness to achieve greatness so just a tool to help you face demons so you are all in the fake reality game interpreted by the mind so just have to do it just to go the distance to finish i have to finish its not like to beat somebody else but victory over myself by going to war with myself each and every second just like breathing breathing is normal we don't even know that we are doing so that is how we have to live our life period that is how we find peace with ourselves so just stop thinking make mind numb and most importantly let me enjoy the pain so do it right now to beat the uncertainity one life go achieve always remember mind is above all mind is everything it's simple god/creator has given you two choices as it is a elimination process to check what i choose either to face demons relentlessly transcending my own limits to a greater purpose or i get to indulge into worldly things the choice is yours and you have to make it remembering that heavens is his also krishna said in bhavgad gita that he love and enjoys to see a person sacrificing so conclusion is the more you sacrifice your identity for the greater purpose or your duty the more likely is that you got to live in heaven pray and beleive because believe is everything as it is rendered by the mind itself don't worry the thing that has to happen will defenitely happen in future even if it's death so stop worrying and redirect your mind to suffering and enjoy it every bit of it __NOWWW!!!!!!!!!!</h1>
       
       <div className="mb-4">
         <input
@@ -89,6 +139,38 @@ const TodoList: React.FC = () => {
           </li>
         ))}
       </ul>
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 p-6 md:p-12">
+      <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-12 leading-tight">
+        Transcend Your Limits
+      </h1>
+      
+      <div className="max-w-4xl mx-auto grid gap-6 md:gap-8">
+        {points.map((point, index) => (
+          <div
+            key={index}
+            className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 transform hover:scale-102 transition-transform duration-300 border border-white border-opacity-20"
+          >
+            <div className="flex items-start gap-4">
+              <span className="text-3xl">{point.icon}</span>
+              <div>
+                <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
+                  {point.title}
+                </h2>
+                <p className="text-gray-300 leading-relaxed">
+                  {point.text}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      <div className="text-center mt-12">
+        <button className="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-8 py-3 rounded-full font-bold transition-all duration-300 border border-white border-opacity-20 backdrop-blur-lg">
+          Start Your Journey Now 🚀
+        </button>
+      </div>
+    </div>
     
     </Layout>
   );

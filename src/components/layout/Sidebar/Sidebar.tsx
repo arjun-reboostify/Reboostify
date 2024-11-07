@@ -16,6 +16,7 @@ import logoutIcon from '../../../assets/icons/logout.svg'
 import styles from './Sidebar.module.scss'
 //components
 import { Link } from 'react-router-dom';
+import lone from '../../../assets/lone.jfif'
 
     ``
 // Import statements remain unchanged
@@ -119,8 +120,8 @@ export const Sidebar = () => {
                     </button>
                     <nav>
                     <Link to='/Make'>
-                           
-                            <span>👀Now</span>
+                    <img src={lone} alt='Make' />
+                            
                         </Link>
                         </nav>
                 </div>

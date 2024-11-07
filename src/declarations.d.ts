@@ -4,7 +4,7 @@ declare module '*.mp3' {
     export default src;
 }
 // src/declarations.d.ts
-declare module '*.mp3' {
+declare module '*.jfif' {
     const src: string;
     export default src;
 }

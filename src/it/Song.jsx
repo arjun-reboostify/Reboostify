@@ -1,23 +1,43 @@
 import { useState, useRef, useEffect } from 'react';
+import { Layout } from '../components/layout/Layout/Layout';
 import track1 from './music/Espresso.mp3';
-import musicconcentration from './music/Espresso.mp3';
-import track2 from './music/Espresso.mp3'
-import { Layout } from '../components/layout/Layout/Layout'
-import coverImage from './music/espresso.jpg'; // Assuming the cover image is the same for all tracks
+import track2 from './music/Espresso.mp3';
+import track3 from './music/Espresso.mp3';
+import track4 from './music/Espresso.mp3';
+import coverImage from './music/espresso.jpg';
 
 const songsList = [
-  { name: "hans zimmer", artist: 'interstellar theme', src: musicconcentration, cover: coverImage },
-  { name: "narvent", artist: 'Fainted', src: track1, cover: coverImage },
-  { name: "narvent", artist: 'Memory Reboot', src: track2, cover: coverImage },
-  { name: "", artist: 'fainted', src: track2, cover: coverImage },
-  // Add other tracks here...
+  { 
+    name: 'hans zimmer', 
+    artist: 'interstellar theme', 
+    src: track1, 
+    cover: coverImage 
+  },
+  { 
+    name: 'narvent', 
+    artist: 'Fainted', 
+    src: track2, 
+    cover: coverImage 
+  },
+  { 
+    name: 'narvent', 
+    artist: 'Memory Reboot', 
+    src: track3, 
+    cover: coverImage 
+  },
+  { 
+    name: '', 
+    artist: 'fainted', 
+    src: track4, 
+    cover: coverImage 
+  },
 ];
 
 const SongBox = () => {
   const [currentSong, setCurrentSong] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [loop, setLoop] = useState(false); // State for loop functionality
+  const [loop, setLoop] = useState(false);
   const song = useRef(new Audio(songsList[currentSong].src));
   const progressBarRef = useRef(null);
 
@@ -93,39 +113,84 @@ const SongBox = () => {
 
   return (
     <Layout title='Song'>
-    
-      <div className="text-white font-bold text-lg">{songsList[currentSong].artist}</div>
-      <div className="text-gray-400 text-sm my-1">{songsList[currentSong].name}</div>
-      <div ref={progressBarRef} className="w-full h-1 bg-gray-600 rounded-full cursor-pointer" onClick={seek}>
-        <div className="bg-green-500 h-1 rounded-full" style={{ width: `${progress}%` }}></div>
-      </div>
-      <div className="text-gray-400 text-sm mt-2">
-        {formatTime(song.current.currentTime)} - {formatTime(song.current.duration)}
-      </div>
-
-      <div className="flex justify-center items-center">
-        <div
-          className={`w-40 h-40 bg-cover bg-center rounded-full border-4 border-black shadow-lg [animation-duration:10s] ${playing ? 'animate-spin' : ''}`}
+      <div className="fixed inset-0 bg-gradient-to-b from-gray-900 to-black overflow-hidden">
+        {/* Background with blur effect */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-20 blur-sm"
           style={{ backgroundImage: `url(${songsList[currentSong].cover})` }}
         />
-      </div>
+        
+        {/* Main container with responsive padding */}
+        <div className="relative min-h-screen flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-8 space-y-4 sm:space-y-6 lg:space-y-8">
+          {/* Album Art - Responsive sizes */}
+          <div className="relative w-48 h-48 sm:w-64 sm:h-64 lg:w-96 lg:h-96 transition-all duration-300">
+            <div
+              className={`w-full h-full bg-cover bg-center rounded-2xl border-4 sm:border-6 lg:border-8 border-gray-800 shadow-2xl transition-transform duration-300 hover:scale-105 ${
+                playing ? 'animate-spin [animation-duration:20s]' : ''
+              }`}
+              style={{ backgroundImage: `url(${songsList[currentSong].cover})` }}
+            />
+          </div>
 
-      <div className="flex justify-center items-center gap-4 bg-gray-800 mt-4 rounded-xl p-4 shadow-lg">
-        <span onClick={prevSong} className="text-red-500 text-3xl cursor-pointer hover:text-white transition-colors">
-          ⏮️
-        </span>
-        <span onClick={togglePlayPause} className={`text-3xl cursor-pointer text-teal-500 bg-blue-700 p-4 rounded-full hover:bg-green-700 transition-colors`}>
-          {playing ? '⏸️' : '▶️'}
-        </span>
-        <span onClick={nextSong} className="text-red-500 text-3xl cursor-pointer hover:text-white transition-colors">
-          ⏭️
-        </span>
+          {/* Song Info - Responsive text sizes */}
+          <div className="text-center space-y-1 sm:space-y-2">
+            <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-bold truncate max-w-[90vw] sm:max-w-[70vw] lg:max-w-[50vw]">
+              {songsList[currentSong].artist}
+            </h2>
+            <p className="text-gray-400 text-lg sm:text-xl truncate max-w-[80vw] sm:max-w-[60vw] lg:max-w-[40vw]">
+              {songsList[currentSong].name}
+            </p>
+          </div>
 
-        <div onClick={toggleLoop} className={`w-12 h-12 flex items-center justify-center rounded-full transition-colors ${loop ? 'bg-yellow-500' : 'bg-black'}`}>
-          <span className="text-2xl cursor-pointer text-white">🔁</span>
+          {/* Progress Bar - Responsive width and touch-friendly */}
+          <div className="w-full max-w-xs sm:max-w-lg lg:max-w-2xl px-2 sm:px-4 space-y-2">
+            <div 
+              ref={progressBarRef} 
+              className="w-full h-2 sm:h-3 bg-gray-700 rounded-full cursor-pointer touch-none"
+              onClick={seek}
+            >
+              <div 
+                className="bg-green-500 h-full rounded-full transition-all duration-100"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <div className="flex justify-between text-gray-400 text-sm sm:text-base lg:text-lg">
+              <span>{formatTime(song.current.currentTime)}</span>
+              <span>{formatTime(song.current.duration)}</span>
+            </div>
+          </div>
+
+          {/* Controls - Responsive sizing and spacing */}
+          <div className="flex items-center justify-center gap-3 sm:gap-6 lg:gap-8 bg-gray-800/50 backdrop-blur-lg p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl shadow-2xl">
+            <button 
+              onClick={prevSong} 
+              className="text-3xl sm:text-4xl lg:text-5xl hover:text-red-500 transition-colors p-2 sm:p-3"
+            >
+              ⏮️
+            </button>
+            <button 
+              onClick={togglePlayPause} 
+              className="text-4xl sm:text-5xl lg:text-6xl bg-blue-600 hover:bg-blue-700 p-4 sm:p-6 lg:p-8 rounded-full transition-all transform hover:scale-105"
+            >
+              {playing ? '⏸️' : '▶️'}
+            </button>
+            <button 
+              onClick={nextSong} 
+              className="text-3xl sm:text-4xl lg:text-5xl hover:text-red-500 transition-colors p-2 sm:p-3"
+            >
+              ⏭️
+            </button>
+            <button 
+              onClick={toggleLoop}
+              className={`p-3 sm:p-4 lg:p-6 rounded-full transition-all transform hover:scale-105 ${
+                loop ? 'bg-yellow-500' : 'bg-gray-700'
+              }`}
+            >
+              <span className="text-xl sm:text-2xl lg:text-3xl">🔁</span>
+            </button>
+          </div>
         </div>
       </div>
-    
     </Layout>
   );
 };
