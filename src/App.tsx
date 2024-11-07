@@ -24,8 +24,8 @@ import Chat from './it/Chat'
 import Song from './it/Song'
 import Chatbot from './it/Chatbot'
 import Quote from './it/Quote'
-import Hope from './it/hope'
-import Chance from './it/chance'
+
+
 import Tinder from './it/Tinder'
 import Road from './it/Road'
 import Make from './it/Make'
@@ -35,8 +35,8 @@ export function App() {
 
   return (
     <>
-    <Hope />
-    <Chance />
+    
+   
     <Chatbot />
       {authReady && <>
         {user ?

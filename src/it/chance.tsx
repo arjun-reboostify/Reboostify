@@ -8,12 +8,12 @@ const LoadingOverlay: React.FC = () => {
     // Show the overlay after 2 seconds
     const timer1 = setTimeout(() => {
       setVisible(true);
-    }, 3500);
+    }, 500);
 
     // Hide the overlay after 4 seconds
     const timer2 = setTimeout(() => {
       setVisible(false);
-    }, 6000); // 2 seconds + 4 seconds
+    }, 2500); // 2 seconds + 4 seconds
 
     // Clean up timers on component unmount
     return () => {

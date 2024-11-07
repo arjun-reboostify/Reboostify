@@ -44,13 +44,13 @@ export const Login = ({ handleClosingForms }: LoginProps) => {
                 <div className={styles.button_row}>
                     <button type='submit' className={styles.loginBtn}>Log in!</button>
                     <button
-                        className={styles.return_button}
-                        onClick={handleClosingForms}
-                        type='button'
-                        aria-label='Return button'
-                    >
-                        <img src={arrowback} alt='Back arrow' />
-                    </button>
+    onClick={() => window.location.reload()}
+    type='button'
+    aria-label='Return button'
+>
+    register
+</button>
+
                 </div>
             </form>
             {errorMessage && <p>{errorMessage}</p>}

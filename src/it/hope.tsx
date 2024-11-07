@@ -98,17 +98,15 @@ const Starfield: React.FC = () => {
     };
     draw();
 
-    const timer = setTimeout(() => {
-      setShowText(true); // Show the text after 2 seconds
-    }, 2500);
+    
 
     // Hide the starfield after 3 seconds
     const hideStarfieldTimer = setTimeout(() => {
       setShowStarfield(false); // Hide the starfield after 3 seconds
-    }, 3000);
+    }, 2500);
 
     return () => {
-      clearTimeout(timer); // Cleanup the timer on unmount
+     
       clearTimeout(hideStarfieldTimer); // Cleanup the hide starfield timer
       canvas.removeEventListener('mouseenter', handleMouseEnter); // Cleanup mouse enter event listener
       canvas.removeEventListener('mouseleave', handleMouseLeave); // Cleanup mouse leave event listener

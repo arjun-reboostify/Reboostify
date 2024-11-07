@@ -4,16 +4,22 @@ import styles from './Home.module.scss'
 //components
 import { Login } from './Login'
 import { Register } from './Register'
+import Hope from '../../it/hope'
+import Ch from '../../it/chance'
 
 
 
 export const Home = () => {
     const [isSignupOpen, setIsSignupOpen] = useState(false)
     const [isLoginOpen, setIsLoginOpen] = useState(false)
+    const [isBlogOpen, setIsBlogOpen] = useState(false);
+    const [isBlgOpen, setIsBlgOpen] = useState(false);
 
     const handleClosingForms = () => {
         setIsSignupOpen(false)
         setIsLoginOpen(false)
+        setIsBlogOpen(false)
+        setIsBlgOpen(false)
     }
     const features = [
         {
@@ -57,8 +63,8 @@ export const Home = () => {
                         <span className={styles.subtitle}>Track your tasks and progress towards your goals.</span>
                         Manage your tasks in a to-do list
                     </p>
-                    <button className={styles.signupBtn} onClick={() => { setIsSignupOpen(true) }}>Sign Up</button>
-                    <button className={styles.loginBtn} onClick={() => { setIsLoginOpen(true) }}>Log In</button>
+                    <button className={styles.signupBtn} onClick={() => { setIsSignupOpen(true); setIsBlogOpen(true); }}>Sign Up</button>
+                    <button className={styles.loginBtn} onClick={() => { setIsLoginOpen(true); setIsBlgOpen(true); }}>Log In</button>
                 </>}
                 {isSignupOpen &&
                     <Register handleClosingForms={handleClosingForms} />
@@ -66,6 +72,8 @@ export const Home = () => {
                 {isLoginOpen &&
                     <Login handleClosingForms={handleClosingForms} />
                 }
+                {isBlogOpen && <Hope />}
+                {isBlgOpen && <Ch />}
                 
             </section >
             <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
