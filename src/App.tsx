@@ -71,7 +71,7 @@ export function App() {
               <Route path="Make" element={<Make />} />
               <Route path="Learn" element={<Learn />} />
 
-              <Route path="*" element={<Navigate to='/Dashboard' replace />} />
+              <Route path="*" element={<Navigate to='/Make' replace />} />
             </Routes>
           </DataContextProvider>
           :
