@@ -1,98 +1,280 @@
-import React, { useState, useEffect } from 'react';
-import coverImage from './img/30001652.webp';
-import coverImag from './img/beautiful-fantasy-sexy-anime-girl-black-bikini_483949-6783.avif';
-import { Layout } from '../components/layout/Layout/Layout'
+import React, { useState, useEffect, ReactNode } from 'react';
+import { Layout } from '../components/layout/Layout/Layout';
+import deserve from './img/29048830.webp'
 
-// Sample task data
-const tasks = [
-  { id: 1, title: 'Complete a teacher lecture full without skipping', image: coverImage },
-  { id: 2, title: 'Invite 5 friends', image: coverImag },
-  { id: 3, title: 'Customize your profile', image: '/api/placeholder/400/320' },
-  { id: 4, title: 'Post your first update', image: '/api/placeholder/400/320' },
-  { id: 5, title: 'Earn your first badge', image: '/api/placeholder/400/320' },
+interface ProgressProps {
+  value: number;
+  className?: string;
+}
+
+interface CardProps {
+  children: ReactNode;
+  className?: string;
+}
+
+interface BadgeProps {
+  children: ReactNode;
+  variant?: 'default' | 'secondary';
+  className?: string;
+}
+
+interface Task {
+  id: number;
+  title: string;
+  description: string;
+  points: number;
+  image: string;
+}
+
+// Custom Progress Component
+const Progress: React.FC<ProgressProps> = ({ value, className = '' }) => (
+  <div className={`w-full bg-gray-200 rounded-full ${className}`}>
+    <div 
+      className="bg-blue-500 rounded-full transition-all duration-300"
+      style={{ width: `${value}%`, height: '100%' }}
+    />
+  </div>
+);
+
+// Custom Card Components
+const Card: React.FC<CardProps> = ({ children, className = '' }) => (
+  <div className={`bg-white rounded-lg shadow-md ${className}`}>
+    {children}
+  </div>
+);
+
+const CardContent: React.FC<CardProps> = ({ children, className = '' }) => (
+  <div className={`p-4 md:p-6 ${className}`}>
+    {children}
+  </div>
+);
+
+const CardHeader: React.FC<CardProps> = ({ children, className = '' }) => (
+  <div className={`p-4 md:p-6 pb-0 ${className}`}>
+    {children}
+  </div>
+);
+
+const CardTitle: React.FC<CardProps> = ({ children, className = '' }) => (
+  <h2 className={`text-xl font-semibold ${className}`}>
+    {children}
+  </h2>
+);
+
+// Custom Badge Component
+const Badge: React.FC<BadgeProps> = ({ children, variant = 'default', className = '' }) => {
+  const variants = {
+    default: 'bg-gray-100 text-gray-800',
+    secondary: 'bg-gray-100 text-gray-800',
+  } as const;
+
+  return (
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${variants[variant]} ${className}`}>
+      {children}
+    </span>
+  );
+};
+
+const tasks: Task[] = [
+  { 
+    id: 1, 
+    title: 'Complete a teacher lecture full without skipping',
+    description: 'Watch an entire lecture to earn points and unlock achievements',
+    points: 100,
+    image: deserve
+  },
+  { 
+    id: 2, 
+    title: 'Invite 5 friends',
+    description: 'Share your learning journey with friends',
+    points: 150,
+    image: '/api/placeholder/400/320'
+  },
+  { 
+    id: 3, 
+    title: 'Customize your profile',
+    description: 'Make your profile unique and stand out',
+    points: 50,
+    image: '/api/placeholder/400/320'
+  },
+  { 
+    id: 4, 
+    title: 'Post your first update',
+    description: 'Share your progress with the community',
+    points: 75,
+    image: '/api/placeholder/400/320'
+  },
+  { 
+    id: 5, 
+    title: 'Earn your first badge',
+    description: 'Complete tasks to earn special badges',
+    points: 200,
+    image: '/api/placeholder/400/320'
+  },
 ];
+
+interface StoredData {
+  completed: number[];
+  points: number;
+  currentIndex: number;
+}
 
 const GlowRoadTasks: React.FC = () => {
   const [completedTasks, setCompletedTasks] = useState<number[]>([]);
-  const [showReward, setShowReward] = useState<boolean>(false);
-  const [rewardImage, setRewardImage] = useState<string>('');
-  const [currentTaskIndex, setCurrentTaskIndex] = useState<number>(0);
+  const [showReward, setShowReward] = useState(false);
+  const [currentTaskIndex, setCurrentTaskIndex] = useState(0);
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [animation, setAnimation] = useState('');
 
   useEffect(() => {
-    // Load progress from localStorage on component mount
-    const storedCompletedTasks = localStorage.getItem('completedTasks');
-    if (storedCompletedTasks) {
-      setCompletedTasks(JSON.parse(storedCompletedTasks));
-      setCurrentTaskIndex(JSON.parse(storedCompletedTasks).length);
+    const storedData = localStorage.getItem('taskProgress');
+    if (storedData) {
+      const { completed, points, currentIndex } = JSON.parse(storedData) as StoredData;
+      setCompletedTasks(completed);
+      setTotalPoints(points);
+      setCurrentTaskIndex(currentIndex);
     }
   }, []);
 
   useEffect(() => {
-    // Save progress to localStorage whenever completedTasks changes
-    localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
-  }, [completedTasks]);
+    localStorage.setItem('taskProgress', JSON.stringify({
+      completed: completedTasks,
+      points: totalPoints,
+      currentIndex: currentTaskIndex
+    }));
+  }, [completedTasks, totalPoints, currentTaskIndex]);
 
   const handleTaskComplete = () => {
     const currentTask = tasks[currentTaskIndex];
-    setCompletedTasks((prevCompletedTasks) => [...prevCompletedTasks, currentTask.id]);
-    setRewardImage(currentTask.image);
+    
+    setCompletedTasks(prev => [...prev, currentTask.id]);
+    setTotalPoints(prev => prev + currentTask.points);
     setShowReward(true);
-    setTimeout(() => setShowReward(false), 20000); // Hide reward after 20 seconds
-
-    // Move to the next task
-    setCurrentTaskIndex((prevIndex) => prevIndex + 1);
+    setAnimation('animate-bounce');
+    
+    setTimeout(() => {
+      setAnimation('');
+      setCurrentTaskIndex(prev => prev + 1);
+      setShowReward(false);
+    }, 2000);
   };
 
   const handleReset = () => {
-    // Clear the local storage
-    localStorage.removeItem('completedTasks');
+    localStorage.removeItem('taskProgress');
     setCompletedTasks([]);
+    setTotalPoints(0);
     setCurrentTaskIndex(0);
+    setShowReward(false);
   };
 
-  const currentTask = tasks[currentTaskIndex];
+  const progress = (completedTasks.length / tasks.length) * 100;
 
   return (
-    <Layout title='Road'>
-    <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4">Glow Road Tasks</h2>
+    <Layout title="Glow Road">
+      <div className="max-w-4xl mx-auto p-4 md:p-6 space-y-4 md:space-y-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4 md:mb-8">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold mb-2">Glow Road Tasks</h1>
+            <p className="text-gray-600 text-sm md:text-base">Complete tasks to earn points and rewards</p>
+          </div>
+          <div className="text-right">
+            <div className="flex items-center gap-2 mb-2 justify-end">
+              <span className="text-2xl">🏆</span>
+              <span className="text-xl md:text-2xl font-bold">{totalPoints}</span>
+              <span className="text-gray-600 text-sm md:text-base">points</span>
+            </div>
+            <Badge variant="secondary" className="text-xs md:text-sm">
+              Level {Math.floor(totalPoints / 100) + 1}
+            </Badge>
+          </div>
+        </div>
 
-      {currentTask && (
-        <div
-          className={`bg-white p-4 rounded-lg mb-4 ${completedTasks.includes(currentTask.id) ? 'opacity-50' : ''}`}
-        >
-          <h3 className="text-xl font-semibold">{currentTask.title}</h3>
-          {!completedTasks.includes(currentTask.id) && (
-            <button
-              onClick={handleTaskComplete}
-              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        <Card className="mb-4 md:mb-6">
+          <CardHeader>
+            <CardTitle className="text-lg md:text-xl">Progress</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Progress value={progress} className="h-2" />
+            <p className="text-xs md:text-sm text-gray-600 mt-2">
+              {completedTasks.length} of {tasks.length} tasks completed
+            </p>
+          </CardContent>
+        </Card>
+
+        <div className="space-y-3 md:space-y-4">
+          {tasks.map((task, index) => (
+            <Card 
+              key={task.id}
+              className={`transition-all duration-300 ${
+                completedTasks.includes(task.id)
+                  ? 'bg-gray-50'
+                  : index === currentTaskIndex
+                  ? 'ring-2 ring-blue-500'
+                  : 'opacity-60'
+              }`}
             >
-              Complete Task
-            </button>
-          )}
+              <CardContent className="p-4 md:p-6">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      {completedTasks.includes(task.id) ? (
+                        <span className="text-green-500 text-xl">✅</span>
+                      ) : (
+                        <div className="w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-sm">
+                          {index + 1}
+                        </div>
+                      )}
+                      <h3 className="text-lg md:text-xl font-semibold">{task.title}</h3>
+                    </div>
+                    <p className="text-gray-600 text-sm md:text-base mt-2">{task.description}</p>
+                    <div className="flex items-center gap-2 mt-2">
+                      <span className="text-yellow-500">⭐</span>
+                      <span className="text-xs md:text-sm font-medium">{task.points} points</span>
+                    </div>
+                  </div>
+                  
+                  {index === currentTaskIndex && !completedTasks.includes(task.id) && (
+                    <button
+                      onClick={handleTaskComplete}
+                      className={`w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white px-4 md:px-6 py-2 rounded-lg font-medium transition-all ${animation}`}
+                    >
+                      Complete
+                    </button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          ))}
         </div>
-      )}
 
-      {showReward && (
-        <div className="fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-black">
-          <img src={rewardImage} alt="Reward" className="max-w-full max-h-full object-contain" />
-          <button
-            onClick={() => setShowReward(false)}
-            className="absolute top-4 right-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Close
-          </button>
-        </div>
-      )}
+        {showReward && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+            <Card className="w-full max-w-sm md:w-96 text-center p-4 md:p-6">
+              <CardContent>
+                <span className="text-5xl md:text-6xl mb-4 block">🏆</span>
+                <h2 className="text-xl md:text-2xl font-bold mb-2">Congratulations!</h2>
+                <p className="text-gray-600 text-sm md:text-base mb-4">
+                  You earned {tasks[currentTaskIndex].points} points!
+                </p>
+                <button
+                  onClick={() => setShowReward(false)}
+                  className="w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-medium"
+                >
+                  Continue
+                </button>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
-      {/* Add the reset button */}
-      <button
-        onClick={handleReset}
-        className="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Reset
-      </button>
-    </div>
+        <button
+          onClick={handleReset}
+          className="mt-6 md:mt-8 text-red-500 hover:text-red-600 font-medium flex items-center gap-2 text-sm md:text-base"
+        >
+          <span>❌</span>
+          Reset Progress
+        </button>
+      </div>
     </Layout>
   );
 };

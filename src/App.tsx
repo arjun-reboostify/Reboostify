@@ -29,6 +29,7 @@ import Quote from './it/Quote'
 import Tinder from './it/Tinder'
 import Road from './it/Road'
 import Make from './it/Make'
+import Learn from './it/Learn'
 
 export function App() {
   const { user, authReady } = useContext(UserContext)
@@ -68,6 +69,7 @@ export function App() {
               <Route path="Tinder" element={<Tinder />} />
               <Route path="Road" element={<Road />} />
               <Route path="Make" element={<Make />} />
+              <Route path="Learn" element={<Learn />} />
 
               <Route path="*" element={<Navigate to='/Dashboard' replace />} />
             </Routes>
