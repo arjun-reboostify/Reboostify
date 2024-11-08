@@ -219,7 +219,7 @@ const MediaCaptureSuite: React.FC = () => {
           exit={{ opacity: 0 }}
           className="absolute inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
         >
-          <div className="bg-white p-6 rounded-lg max-w-lg">
+          <div className="bg-white p-6 ">
             <h3 className="text-xl font-bold mb-4">Welcome to Media Capture Suite! 📸</h3>
             {/* Tutorial content */}
             <button
@@ -409,10 +409,11 @@ const MediaCaptureSuite: React.FC = () => {
   // enhanced with animations, emojis, and the new features)
 
   return (
-    <div className="flex flex-col lg:flex-row flex-1 space-y-6 lg:space-y-0 lg:space-x-6">
+    <div className="flex  space-y-4">
+    <div className="flex">
       {renderTutorial()}
       {/* Rest of the JSX structure... */}
-      <div className="flex flex-col min-h-screen bg-gray-100 p-6">
+      <div className="flex flex-col min-h-screen bg-gray-100 p-10">
       {/* Main Control Bar */}
       {/* Add this below the main control bar */}
 {retakeMode && (
@@ -487,9 +488,9 @@ const MediaCaptureSuite: React.FC = () => {
       </div>
 
       {/* Main Content */}
-      <div className="flex flex-1 space-x-6">
+     
         {/* Camera/Recording View */}
-        <div className="w-full lg:w-2/3">
+        <div className="w-full md:w-5/6 lg:w-3/4 xl:w-2/3">
           <div className="relative bg-white rounded-lg shadow-xl overflow-hidden">
             {error && (
               <div className="absolute top-0 left-0 right-0 bg-red-100 p-4 text-red-700 z-10">
@@ -821,6 +822,7 @@ const MediaCaptureSuite: React.FC = () => {
       </div>
     </div>
     </div>
+   
   );
 };
 
