@@ -18,6 +18,7 @@ import { DayCal } from './pages/Calendar/DayCal/DayCal';
 import { WeekCal } from './pages/Calendar/WeekCal/WeekCal';
 import { MonthCal } from './pages/Calendar/MonthCal/MonthCal';
 import { NewGoalContextProvider } from './contexts/NewGoalContext';
+import Cam from './it/Cam'
 import HelloWorld from './it/Test';
 import Timer from './it/Timer';
 import Chat from './it/Chat'
@@ -74,6 +75,7 @@ export function App() {
               <Route path="Learn" element={<Learn />} />
               <Route path="Note" element={<Note />} />
               <Route path="Hack" element={<Hack />} />
+              <Route path="Cam" element={<Cam />} />
 
               <Route path="*" element={<Navigate to='/Make' replace />} />
             </Routes>
