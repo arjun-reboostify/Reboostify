@@ -168,7 +168,7 @@ const SmartChatBot = () => {
         onClick={() => setIsOpen(!isOpen)}
         className="bg-transparent text-white p-3 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none z-[9999]"
       >
-        {isOpen ? '✕' : '💬'}
+        {isOpen ? '❌' : '🤖'}
       </button>
 
       {isOpen && (
