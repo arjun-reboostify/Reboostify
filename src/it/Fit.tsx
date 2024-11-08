@@ -51,8 +51,8 @@ const StepCounter: React.FC = () => {
         <input
           id="sensitivity"
           type="range"
-          min="0.5"
-          max="3.0"
+          min="0"
+          max="100"
           step="0.1"
           value={sensitivity}
           onChange={handleSensitivityChange}
