@@ -27,6 +27,7 @@ import Chatbot from './it/Chatbot'
 import Quote from './it/Quote'
 import Note from './it/Note'
 import Hack from './it/Hack'
+import Fit from './it/Fit'
 
 
 import Tinder from './it/Tinder'
@@ -76,6 +77,7 @@ export function App() {
               <Route path="Note" element={<Note />} />
               <Route path="Hack" element={<Hack />} />
               <Route path="Cam" element={<Cam />} />
+              <Route path="Fit" element={<Fit />} />
 
               <Route path="*" element={<Navigate to='/Make' replace />} />
             </Routes>
