@@ -4,6 +4,8 @@ interface Task {
   id: string;
   deadline: string;
   description: string;
+  completed: boolean;
+  notes: string;
 }
 
 const Clock = () => {
@@ -12,7 +14,10 @@ const Clock = () => {
     const savedTasks = localStorage.getItem('clockTasks');
     return savedTasks ? JSON.parse(savedTasks) : [];
   });
-  const [newTask, setNewTask] = useState<Omit<Task, 'id'>>({ deadline: '', description: '' });
+  const [newTask, setNewTask] = useState<Omit<Task, 'id' | 'completed' | 'notes'>>({
+    deadline: '',
+    description: '',
+  });
   const [currentTaskIndex, setCurrentTaskIndex] = useState<number>(0);
   const [isAddingTask, setIsAddingTask] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
@@ -61,12 +66,12 @@ const Clock = () => {
 
     const currentTimeString = `${time.getHours().toString().padStart(2, '0')}:${time.getMinutes().toString().padStart(2, '0')}`;
     const sortedTasks = [...tasks].sort((a, b) => a.deadline.localeCompare(b.deadline));
-    
+
     // Find the current task based on time ranges
     for (let i = 0; i < sortedTasks.length; i++) {
       const currentTaskDeadline = sortedTasks[i].deadline;
       const previousTaskDeadline = i > 0 ? sortedTasks[i - 1].deadline : '00:00';
-      
+
       if (isTimeInRange(currentTimeString, previousTaskDeadline, currentTaskDeadline)) {
         return sortedTasks[i];
       }
@@ -82,13 +87,14 @@ const Clock = () => {
     return sortedTasks[0];
   };
 
-  // Rest of the component remains the same...
   const addTask = (e: React.FormEvent) => {
     e.preventDefault();
     if (newTask.deadline && newTask.description) {
       const task: Task = {
         id: Date.now().toString(),
-        ...newTask
+        ...newTask,
+        completed: false,
+        notes: '',
       };
       setTasks([...tasks, task]);
       setNewTask({ deadline: '', description: '' });
@@ -99,17 +105,39 @@ const Clock = () => {
   const updateTask = (e: React.FormEvent) => {
     e.preventDefault();
     if (editingTask) {
-      setTasks(tasks.map(task => 
-        task.id === editingTask.id ? editingTask : task
-      ));
+      setTasks(
+        tasks.map((task) =>
+          task.id === editingTask.id ? { ...editingTask } : task
+        )
+      );
       setEditingTask(null);
     }
   };
 
   const cycleCurrentTask = () => {
     const sortedTasks = [...tasks].sort((a, b) => a.deadline.localeCompare(b.deadline));
-    if (sortedTasks.length > 1) {
-      setCurrentTaskIndex((prevIndex) => (prevIndex + 1) % sortedTasks.length);
+    const currentTask = getCurrentTask();
+
+    if (currentTask && !currentTask.completed) {
+      // Mark the current task as completed
+      setTasks(
+        tasks.map((task) =>
+          task.id === currentTask.id
+            ? { ...currentTask, completed: true }
+            : task
+        )
+      );
+
+      // Find the index of the next uncompleted task
+      const nextIndex = sortedTasks.findIndex(
+        (task) => !task.completed && task.deadline > currentTask.deadline
+      );
+      if (nextIndex !== -1) {
+        setCurrentTaskIndex(nextIndex);
+      } else {
+        // If no uncompleted task is found, go back to the first task
+        setCurrentTaskIndex(0);
+      }
     }
   };
 
@@ -128,14 +156,21 @@ const Clock = () => {
     <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
       {/* Active Task Banner */}
       {currentTask && (
-        <div 
+        <div
           onClick={cycleCurrentTask}
-          className="w-full max-w-3xl mb-8 cursor-pointer transform hover:scale-105 transition-all"
+          className={`w-full max-w-3xl mb-8 cursor-pointer transform hover:scale-105 transition-all ${
+            currentTask.completed
+              ? 'bg-gradient-to-r from-green-500 to-green-600'
+              : 'bg-gradient-to-r from-purple-600 to-pink-600'
+          }`}
         >
-          <div className="p-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg shadow-lg animate-pulse">
+          <div className="p-4 rounded-lg shadow-lg animate-pulse">
             <div className="text-white text-center">
               <p className="text-xl font-bold mb-1">{currentTask.description}</p>
               <p className="text-sm">Deadline: {currentTask.deadline}</p>
+              {currentTask.completed && (
+                <p className="text-sm">Task completed</p>
+              )}
             </div>
           </div>
         </div>
@@ -182,7 +217,11 @@ const Clock = () => {
             }}
           />
           <div
-            className="absolute w-1 h-36 bg-pink-500 rounded-full"
+            className={`absolute w-1 h-36 rounded-full ${
+              currentTask && !currentTask.completed
+                ? 'bg-pink-500'
+                : 'bg-gray-400'
+            }`}
             style={{
               transform: `rotate(${secondRotation}deg)`,
               transformOrigin: 'center bottom',
@@ -201,20 +240,52 @@ const Clock = () => {
         <span className="bg-yellow-400 px-4 py-2 rounded-lg shadow-lg">
           {minutes.toString().padStart(2, '0')}
         </span>
-        <span className="bg-pink-500 px-4 py-2 rounded-lg shadow-lg">
+        <span
+          className={`px-4 py-2 rounded-lg shadow-lg ${
+            currentTask && !currentTask.completed
+              ? 'bg-pink-500'
+              : 'bg-gray-400'
+          }`}
+        >
           {seconds.toString().padStart(2, '0')}
         </span>
-        <span className="bg-blue-500 px-4 py-2 rounded-lg shadow-lg">{ampm}</span>
+        <span className="bg-blue-500 px-4 py-2 rounded-lg shadow-lg">
+          {ampm}
+        </span>
       </div>
 
       {/* Task Management */}
       <div className="mt-8 w-full max-w-md">
+        <div className="flex justify-between">
+          <button
+            onClick={cycleCurrentTask}
+            className={`w-full bg-${
+              currentTask && !currentTask.completed
+                ? 'blue-500 hover:bg-blue-600'
+                : 'gray-500 hover:bg-gray-600'
+            } text-white px-4 py-2 rounded-lg shadow-lg transform hover:scale-105 transition-all`}
+            disabled={!currentTask || currentTask.completed}
+          >
+            {currentTask && !currentTask.completed
+              ? 'Mark as Completed'
+              : 'Next Task'}
+          </button>
+          {currentTaskIndex > 0 && (
+            <button
+              onClick={() => setCurrentTaskIndex((prevIndex) => prevIndex - 1)}
+              className="ml-4 bg-gray-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-gray-600 transform hover:scale-105 transition-all"
+            >
+              Back
+            </button>
+          )}
+        </div>
+
         <button
           onClick={() => {
             setIsAddingTask(!isAddingTask);
             setEditingTask(null);
           }}
-          className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-600 transform hover:scale-105 transition-all"
+          className="mt-4 w-full bg-blue-500 text-white px-4 py-2 rounded-lg shadow-lg hover:bg-blue-600 transform hover:scale-105 transition-all"
         >
           {isAddingTask ? 'Cancel' : 'Add New Task'}
         </button>
@@ -255,6 +326,19 @@ const Clock = () => {
                 required
               />
             </div>
+            <div>
+              <label className="block text-white mb-1 text-sm">Notes</label>
+              <textarea
+                value={editingTask ? editingTask.notes : ''}
+                onChange={(e) => {
+                  if (editingTask) {
+                    setEditingTask({ ...editingTask, notes: e.target.value });
+                  }
+                }}
+                placeholder="Task notes"
+                className="w-full p-2 rounded bg-gray-700 text-white resize-none"
+              />
+            </div>
             <button
               type="submit"
               className="w-full bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transform hover:scale-105 transition-all"
@@ -272,34 +356,51 @@ const Clock = () => {
               {[...tasks]
                 .sort((a, b) => a.deadline.localeCompare(b.deadline))
                 .map((task) => (
-                <div
-                  key={task.id}
-                  className="flex justify-between items-center bg-gray-700 p-3 rounded-lg hover:bg-gray-600 transition-colors"
-                >
-                  <div 
-                    className="flex flex-col flex-grow cursor-pointer"
-                    onClick={() => {
-                      setEditingTask(task);
-                      setIsAddingTask(false);
-                    }}
+                  <div
+                    key={task.id}
+                    className={`flex justify-between items-center bg-${
+                      task.completed
+                        ? 'green-600'
+                        : 'gray-700'
+                    } p-3 rounded-lg hover:bg-gray-600 transition-colors`}
                   >
-                    <span className="text-white text-sm">Deadline: {task.deadline}</span>
-                    <span className="text-white font-medium">{task.description}</span>
+                    <div
+                      className="flex flex-col flex-grow cursor-pointer"
+                      onClick={() => {
+                        setEditingTask(task);
+                        setIsAddingTask(false);
+                      }}
+                    >
+                      <span className="text-white text-sm">
+                        Deadline: {task.deadline}
+                      </span>
+                      <span className="text-white font-medium">
+                        {task.description}
+                      </span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-white text-sm mr-2">
+                        {task.notes}
+                      </span>
+                      <button
+                        onClick={() =>
+                          setTasks(tasks.filter((t) => t.id !== task.id))
+                        }
+                        className="text-red-500 hover:text-red-600 text-xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-500/20 transition-colors ml-2"
+                      >
+                        ×
+                      </button>
+                    </div>
                   </div>
-                  <button
-                    onClick={() => setTasks(tasks.filter(t => t.id !== task.id))}
-                    className="text-red-500 hover:text-red-600 text-xl font-bold w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-500/20 transition-colors ml-2"
-                  >
-                    ×
-                  </button>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
+                  // ... (the previous code continues)
 
-export default Clock;
+                ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+    
+    export default Clock;
