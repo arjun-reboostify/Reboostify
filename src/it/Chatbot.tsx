@@ -1,4 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
+import { 
+  Camera, XCircle, Download, Trash, Video, Mic, 
+  Settings, Image as ImageIcon, Sparkles, Layout, Minimize2,
+  Maximize2, Volume2, VolumeX, RefreshCcw, Pause,
+  Play, Square, Sliders, SunMoon, Layers, Save,
+  RotateCcw, Share2, Filter, Clock, Info
+} from 'lucide-react';
 
 interface Message {
   id: number;
@@ -12,6 +19,7 @@ interface SentenceScore {
 }
 
 const SmartChatBot = () => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>('');
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -144,12 +152,21 @@ const SmartChatBot = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+      setIsFullscreen(true);
+    } else {
+      document.exitFullscreen();
+      setIsFullscreen(false);
+    }
+  };
 
   return (
     <div className="fixed top-4 right-4 z-[9999]">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none z-[9999]"
+        className="bg-transparent text-white p-3 rounded-full shadow-lg hover:bg-blue-600 focus:outline-none z-[9999]"
       >
         {isOpen ? '✕' : '💬'}
       </button>
@@ -195,7 +212,16 @@ const SmartChatBot = () => {
           </div>
         </div>
       )}
+      
+      <button
+      onClick={toggleFullscreen}
+      className="p-2 bg-gray-100 rounded-lg transition-colors hover:bg-gray-200"
+    >
+      {isFullscreen ? <Minimize2 size={20} /> : <Maximize2 size={20} />}
+    </button>
+      
     </div>
+    
   );
 };
 

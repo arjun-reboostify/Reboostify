@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { Layout } from '../components/layout/Layout/Layout'
 import { 
   Camera, XCircle, Download, Trash, Video, Mic, 
-  Settings, Image as ImageIcon, Sparkles, Layout, 
+  Settings, Image as ImageIcon, Sparkles, 
   Maximize2, Volume2, VolumeX, RefreshCcw, Pause,
   Play, Square, Sliders, SunMoon, Layers, Save,
   RotateCcw, Share2, Filter, Clock, Info
@@ -106,7 +107,7 @@ const MediaCaptureSuite: React.FC = () => {
   // UI States
   const [selectedTab, setSelectedTab] = useState<'photo' | 'video' | 'audio'>('photo');
   const [showSettings, setShowSettings] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+
   const [isMuted, setIsMuted] = useState(false);
   const [showTutorial, setShowTutorial] = useState(true);
   
@@ -380,16 +381,6 @@ const MediaCaptureSuite: React.FC = () => {
     link.click();
   };
 
-  // Toggle fullscreen
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-      setIsFullscreen(true);
-    } else {
-      document.exitFullscreen();
-      setIsFullscreen(false);
-    }
-  };
 
   // Effects
   useEffect(() => {
@@ -409,6 +400,7 @@ const MediaCaptureSuite: React.FC = () => {
   // enhanced with animations, emojis, and the new features)
 
   return (
+    <Layout title='Cam'>
     <div className="flex  space-y-4">
     <div className="flex">
       {renderTutorial()}
@@ -478,12 +470,7 @@ const MediaCaptureSuite: React.FC = () => {
           >
             {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
           </button>
-          <button
-            onClick={toggleFullscreen}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-          >
-            <Maximize2 size={20} />
-          </button>
+       
         </div>
       </div>
 
@@ -822,7 +809,7 @@ const MediaCaptureSuite: React.FC = () => {
       </div>
     </div>
     </div>
-   
+    </Layout>
   );
 };
 
