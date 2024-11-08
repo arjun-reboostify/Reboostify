@@ -22,9 +22,19 @@ import lone from '../../../assets/lone.jfif'
 // Import statements remain unchanged
 
 export const Sidebar = () => {
+    const [isFullscreen, setIsFullscreen] = useState(false);
     const { logout } = useLogout()
     const [toggleSidebar, setToggleSidebar] = useState(false)
     const sidebarPanelRef = useRef<HTMLDivElement | null>(null)
+    const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+          setIsFullscreen(true);
+        } else {
+          document.exitFullscreen();
+          setIsFullscreen(false);
+        }
+      };
 
     if (toggleSidebar && sidebarPanelRef.current) {
         onClickOutside(sidebarPanelRef.current, () => { setToggleSidebar(!toggleSidebar) })
@@ -56,6 +66,12 @@ export const Sidebar = () => {
                         <hr />
                     </span>
                     <nav>
+                    <button
+            onClick={toggleFullscreen}
+            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+           djwndjw
+          </button>
                    
                     <Link to='/Road'>
                             <img src={monitoring} alt='Road' />
