@@ -409,22 +409,41 @@ const MediaCaptureSuite: React.FC = () => {
   // enhanced with animations, emojis, and the new features)
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 p-6">
+    <div className="flex flex-col lg:flex-row flex-1 space-y-6 lg:space-y-0 lg:space-x-6">
       {renderTutorial()}
       {/* Rest of the JSX structure... */}
       <div className="flex flex-col min-h-screen bg-gray-100 p-6">
       {/* Main Control Bar */}
-      <div className="flex justify-between items-center mb-6 bg-white rounded-lg p-4 shadow-lg">
-        <div className="flex space-x-4">
-          <button
-            onClick={() => setSelectedTab('photo')}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-              selectedTab === 'photo' ? 'bg-blue-500 text-white' : 'bg-gray-100'
-            }`}
-          >
-            <Camera size={20} />
-            <span>Photo</span>
-          </button>
+      {/* Add this below the main control bar */}
+{retakeMode && (
+  <div className="mb-4 bg-green-100 rounded-lg p-4 flex items-center justify-between">
+    <div className="flex items-center space-x-2">
+      <RotateCcw size={20} className="text-green-600" />
+      <span className="text-green-700">Retake Mode Active</span>
+    </div>
+    <button
+      onClick={() => {
+        setRetakeMode(false);
+        setRetakeId(null);
+      }}
+      className="flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors"
+    >
+      <XCircle size={16} />
+      <span>Cancel Retake</span>
+    </button>
+  </div>
+)}
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-6 bg-white rounded-lg p-4 shadow-lg space-y-4 sm:space-y-0">
+  <div className="flex flex-wrap gap-2">
+    <button
+      onClick={() => setSelectedTab('photo')}
+      className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
+        selectedTab === 'photo' ? 'bg-blue-500 text-white' : 'bg-gray-100'
+      }`}
+    >
+      <Camera size={20} />
+      <span className="hidden sm:inline">Photo</span>
+    </button>
           <button
             onClick={() => setSelectedTab('video')}
             className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
@@ -470,7 +489,7 @@ const MediaCaptureSuite: React.FC = () => {
       {/* Main Content */}
       <div className="flex flex-1 space-x-6">
         {/* Camera/Recording View */}
-        <div className="flex-1">
+        <div className="w-full lg:w-2/3">
           <div className="relative bg-white rounded-lg shadow-xl overflow-hidden">
             {error && (
               <div className="absolute top-0 left-0 right-0 bg-red-100 p-4 text-red-700 z-10">
@@ -553,7 +572,7 @@ const MediaCaptureSuite: React.FC = () => {
 
     {/* Settings Panel (continued) */}
     {showSettings && (
-          <div className="w-80 bg-white rounded-lg shadow-lg p-4 space-y-6">
+        <div className="w-full lg:w-1/3 bg-white rounded-lg shadow-lg p-4 space-y-6">
             <h3 className="text-lg font-semibold flex items-center space-x-2">
               <Settings size={20} />
               <span>Settings</span>
@@ -665,7 +684,7 @@ const MediaCaptureSuite: React.FC = () => {
         )}
 
         {/* Media Gallery */}
-        <div className="mt-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           <h3 className="text-xl font-semibold mb-4">Captured Media</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {capturedMedia.map((media) => (
@@ -694,20 +713,37 @@ const MediaCaptureSuite: React.FC = () => {
                 )}
 
                 {/* Overlay Controls */}
-                <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-4">
-                  <button
-                    onClick={() => downloadMedia(media)}
-                    className="p-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors"
-                  >
-                    <Download size={20} className="text-white" />
-                  </button>
-                  <button
-                    onClick={() => deleteMedia(media.id)}
-                    className="p-2 bg-red-500 rounded-full hover:bg-red-600 transition-colors"
-                  >
-                    <Trash size={20} className="text-white" />
-                  </button>
-                </div>
+                
+                {/* Add this inside the media gallery item overlay controls */}
+<div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center space-x-4">
+  <button
+    onClick={(e) => {
+      e.stopPropagation();
+      handleRetake(media);
+    }}
+    className="p-2 bg-green-500 rounded-full hover:bg-green-600 transition-colors"
+  >
+    <RotateCcw size={20} className="text-white" />
+  </button>
+  <button
+    onClick={(e) => {
+      e.stopPropagation();
+      downloadMedia(media);
+    }}
+    className="p-2 bg-blue-500 rounded-full hover:bg-blue-600 transition-colors"
+  >
+    <Download size={20} className="text-white" />
+  </button>
+  <button
+    onClick={(e) => {
+      e.stopPropagation();
+      deleteMedia(media.id);
+    }}
+    className="p-2 bg-red-500 rounded-full hover:bg-red-600 transition-colors"
+  >
+    <Trash size={20} className="text-white" />
+  </button>
+</div>
 
                 {/* Media Info */}
                 <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-sm p-2">
