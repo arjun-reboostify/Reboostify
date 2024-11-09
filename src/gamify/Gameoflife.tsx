@@ -1,8 +1,10 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { X, Plus, Quote, Search, ChevronLeft, ChevronRight, Save, Trash2 } from 'lucide-react';
 import { Layout } from '../components/layout/Layout/Layout';
-import A from '../it/img/08e7afa211903fbb15f36d9bf9fc166fb52e4ad74b3c9b9bf4ea35a52d513674.webp'
-import B from '../it/img/1326cb3e-be11-4ab7-afdf-ab82bdcc0801.webp'
+import A from './How-to-Improve-Focus-and-Concentration-During-Study-Sessions.jpg'
+import B from './focus-while-studying.png'
+//import B from '../it/img'
+
 
 
 interface Card {
@@ -105,25 +107,17 @@ const SwipeableCards = () => {
 
   const stoicQuotes: Quote[] = [
     {
-      text: "I need you to push a little bit more hard to get me",
+      text: "We suffer more in our imagination than in reality",
       image: A,
-      author: "Futuriora"
+      author: "Marcus Aurelius"
     },
     {
-      text: "I need you to push a little bit more hard to get me",
+      text: "i am just my mind except it nothings mine",
       image: B,
-      author: "Futuriora"
+      author: "Arjun Kumar Dubey"
     },
-    {
-      text: "I need you to push a little bit more hard to get me",
-      image: A,
-      author: "Futuriora"
-    },
-    {
-      text: "I need you to push a little bit more hard to get me",
-      image: A,
-      author: "Futuriora"
-    },
+   
+
    
   ];
 
@@ -559,7 +553,7 @@ useEffect(() => {
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
             <div className="bg-white rounded-lg max-w-md w-full p-6">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-xl font-bold">Congratulations! 🎉</h3>
+                <h3 className="text-xl font-bold">Be a Monster Then learn how to control it</h3>
                 <button
                   onClick={() => setShowQuote(false)}
                   className="text-gray-500 hover:text-gray-700"
@@ -571,7 +565,7 @@ useEffect(() => {
                 <img
                   src={randomQuote().image}
                   alt="Stoic wisdom"
-                  className="w-full h-48 object-cover rounded-lg"
+                  className="w-full h-full object-cover rounded-lg"
                 />
               </div>
               <div className="flex items-start gap-2">
