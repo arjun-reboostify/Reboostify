@@ -121,8 +121,8 @@ export const Sidebar = () => {
                         <img src={logoutIcon} alt='Logout'></img><span>LOGOUT</span>
                     </button>
                     <nav>
-                    <Link to='/Make'>
-                    <img src={lone} alt='Make' />
+                    <Link to='/Gameoflife'>
+                    <img src={lone} alt='Gameoflife' />
                             
                         </Link>
                         </nav>
