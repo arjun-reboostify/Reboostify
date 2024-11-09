@@ -21,39 +21,67 @@ interface Quote {
 
 // Emoji categories for the picker
 const emojiCategories = {
-  'Activities': ['🎨', '🎮', '🎲', '🎯', '🎭', '🎪', '🎨', '🎬', '🎤', '🎧', '🎼', '🎹', '🎸', '🎺', '🎻'],
-  'Nature': ['🌺', '🌸', '🌼', '🌻', '🌹', '🌷', '🌱', '🌲', '🌳', '🌴', '🌵', '🌾', '🌿', '☘️', '🍀'],
-  'Objects': ['📱', '💻', '⌚️', '📚', '✏️', '📝', '📌', '📎', '🔑', '🔨', '🛠️', '⚙️', '📦', '📫', '🗑️'],
-  'Mindfulness': ['🧘', '🌟', '💭', '🎯', '📝', '🌱', '💪', '🧠', '❤️', '✨', '🌈', '☮️', '🕊️', '🌞', '🌙']
+    'Lecture':['🎨', '🎮', '🎲', '🎯', '🎭', '🎪', '🎨', '🎬', '🎤', '🎧', '🎼', '🎹', '🎸', '🎺', '🎻'],
+    'Coding':['🌺', '🌸', '🌼', '🌻', '🌹', '🌷', '🌱', '🌲', '🌳', '🌴', '🌵', '🌾', '🌿', '☘️', '🍀'],
+    'Excercise':['📱', '💻', '⌚️', '📚', '✏️', '📝', '📌', '📎', '🔑', '🔨', '🛠️', '⚙️', '📦', '📫', '🗑️'],
+    'Podcasts/speeches': ['🧘', '🌟', '💭', '🎯', '📝', '🌱', '💪', '🧠', '❤️', '✨', '🌈', '☮️', '🕊️', '🌞', '🌙'],
+    'CourseFollow':[],
+    'Writing':[]
 };
-
+  
 
 const SwipeableCards = () => {
   const [cards, setCards] = useState<Card[]>([
     {
-      id: '1',
-      heading: 'Lecture',
-      emoji: '📱',
-      description: 'watch it attentively till the end',
-      tried: false,
-      category: 'Mindfulness'
-    },
-    {
-      id: '2',
-      heading: 'Write',
-      emoji: '📓',
-      description: 'write down through pen your solutions to the problems',
-      tried: false,
-      category: 'Mindfulness'
-    },
-    {
-        id: '3',
-        heading: 'Construct',
-        emoji: '📓',
-        description: 'using various tools construct yourself various designs ',
+        id: '1',
+        heading: 'Maths',
+        emoji: '📱',
+        description: 'watch it attentively till the end',
         tried: false,
-        category: 'Mindfulness'
-      }
+        category: 'Lecture'
+      },
+      {
+        id: '2',
+        heading: 'Question Paper',
+        emoji: '📓',
+        description: 'write down through pen your solutions to the problems',
+        tried: false,
+        category: 'Writing'
+      },
+      {
+          id: '3',
+          heading: 'Dsa',
+          emoji: '🧠',
+          description: 'do it by heart ',
+          tried: false,
+          category: 'CourseFollow'
+        },
+        {
+          id: '4',
+          heading: 'AcharyaPrashant',
+          emoji: '🌞',
+          description: 'gain insights of spirituality',
+          tried: false,
+          category: 'Podcasts/speeches'
+        },
+        {
+          id: '5',
+          heading: 'Pushups',
+          emoji: '🤸🏻‍♂️',
+          description: 'cross the physical limits',
+          tried: false,
+          category: 'Excercise'
+        },
+        {
+          id: '6',
+          heading: 'ReactJS',
+          emoji: '💻',
+          description: 'Build your Dream',
+          tried: false,
+          category: 'Coding'
+        },
+
+
   ]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -64,12 +92,12 @@ const SwipeableCards = () => {
   const [showAddCard, setShowAddCard] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState('✨');
   const [searchEmoji, setSearchEmoji] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('Mindfulness');
+  const [selectedCategory, setSelectedCategory] = useState('Lecture');
   const [newCard, setNewCard] = useState({
     heading: '',
     description: '',
-    category: 'Mindfulness'
-  });
+    category: 'Lecture'
+  });              
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [filterCategory, setFilterCategory] = useState<string | null>(null);
 
@@ -134,7 +162,7 @@ const SwipeableCards = () => {
     };
     setCards([...cards, newCardData]);
     setShowAddCard(false);
-    setNewCard({ heading: '', description: '', category: 'Mindfulness' });
+    setNewCard({ heading: '', description: '', category: 'Lecture' });
     setSelectedEmoji('✨');
   };
 
@@ -216,36 +244,52 @@ useEffect(() => {
     setCards([
         {
             id: '1',
-            heading: 'Lecture1',
+            heading: 'Maths',
             emoji: '📱',
-            description: 'watch it attentively till the end ',
+            description: 'watch it attentively till the end',
             tried: false,
-            category: 'Mindfulness'
+            category: 'Lecture'
           },
           {
             id: '2',
-            heading: 'Write',
+            heading: 'Question Paper',
             emoji: '📓',
             description: 'write down through pen your solutions to the problems',
             tried: false,
-            category: 'Mindfulness'
-          },
-          {
-            id: '4',
-            heading: 'lecture 2',
-            emoji: '📓',
-            description: 'watch it with headphones',
-            tried: false,
-            category: 'Mindfulness'
+            category: 'Writing'
           },
           {
               id: '3',
-              heading: 'Construct',
-              emoji: '📓',
-              description: 'using various tools construct yourself various designs ',
+              heading: 'Dsa',
+              emoji: '🧠',
+              description: 'do it by heart ',
               tried: false,
-              category: 'Mindfulness'
-            }
+              category: 'CourseFollow'
+            },
+            {
+              id: '4',
+              heading: 'AcharyaPrashant',
+              emoji: '🌞',
+              description: 'gain insights of spirituality',
+              tried: false,
+              category: 'Podcasts/speeches'
+            },
+            {
+              id: '5',
+              heading: 'Pushups',
+              emoji: '🤸🏻‍♂️',
+              description: 'cross the physical limits',
+              tried: false,
+              category: 'Excercise'
+            },
+            {
+              id: '6',
+              heading: 'ReactJS',
+              emoji: '💻',
+              description: 'build your dream',
+              tried: false,
+              category: 'Coding'
+            },
     ]);
     setCurrentIndex(0);
     setFilterCategory(null);
