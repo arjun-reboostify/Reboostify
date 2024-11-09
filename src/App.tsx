@@ -28,6 +28,7 @@ import Quote from './it/Quote'
 import Note from './it/Note'
 import Hack from './it/Hack'
 import Fit from './it/Fit'
+import Gameoflife from './gamify/Gameoflife'
 
 
 import Tinder from './it/Tinder'
@@ -78,6 +79,7 @@ export function App() {
               <Route path="Hack" element={<Hack />} />
               <Route path="Cam" element={<Cam />} />
               <Route path="Fit" element={<Fit />} />
+              <Route path="Gameoflife" element={<Gameoflife />} />
 
               <Route path="*" element={<Navigate to='/Make' replace />} />
             </Routes>
