@@ -214,22 +214,30 @@ useEffect(() => {
     localStorage.removeItem('currentIndex');
     localStorage.removeItem('filterCategory');
     setCards([
-      {
-        id: '1',
-        heading: 'Morning Meditation',
-        emoji: '🧘',
-        description: 'Start your day with 10 minutes of mindful meditation',
-        tried: false,
-        category: 'Mindfulness'
-      },
-      {
-        id: '2',
-        heading: 'Gratitude Journal',
-        emoji: '📓',
-        description: 'Write down three things you are grateful for today',
-        tried: false,
-        category: 'Mindfulness'
-      }
+        {
+            id: '1',
+            heading: 'Lecture',
+            emoji: '📱',
+            description: 'watch it attentively till the end',
+            tried: false,
+            category: 'Mindfulness'
+          },
+          {
+            id: '2',
+            heading: 'Write',
+            emoji: '📓',
+            description: 'write down through pen your solutions to the problems',
+            tried: false,
+            category: 'Mindfulness'
+          },
+          {
+              id: '3',
+              heading: 'Construct',
+              emoji: '📓',
+              description: 'using various tools construct yourself various designs ',
+              tried: false,
+              category: 'Mindfulness'
+            }
     ]);
     setCurrentIndex(0);
     setFilterCategory(null);
