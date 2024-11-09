@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { X, Plus, Quote, Search, ChevronLeft, ChevronRight, Save, Trash2 } from 'lucide-react';
+import { Layout } from '../components/layout/Layout/Layout';
 
 
 interface Card {
@@ -227,8 +228,9 @@ useEffect(() => {
   };
 
   return (
-    <div className="relative min-h-screen bg-gray-100 p-4">
-      <div className="max-w-md mx-auto">
+    <Layout title='Gameoflife'>
+<div className="relative min-h-screen bg-gray-100 p-4 overflow-hidden">
+<div className="max-w-md h-screen mx-auto flex flex-col">
         {/* Category Filter */}
         <div className="mb-6 flex gap-2 overflow-x-auto pb-2">
           <button
@@ -251,7 +253,7 @@ useEffect(() => {
         </div>
 
         {/* Card Stack */}
-        <div className="relative h-96">
+        <div className="relative flex-1 overflow-hidden">
           {filteredCards.map((card, index) => {
             const isVisible = index === currentIndex;
             const transform = isVisible ? `translateX(${offsetX}px)` : 
@@ -271,7 +273,7 @@ useEffect(() => {
                 onMouseUp={handleTouchEnd}
                 onMouseLeave={handleTouchEnd}
               >
-                <div className="bg-white rounded-lg shadow-xl p-6">
+                <div className="bg-white rounded-lg shadow-xl p-6 h-full">
                   <div className="flex justify-between items-start mb-4">
                     <h2 className="text-2xl font-bold">{card.heading}</h2>
                     <button
@@ -306,11 +308,18 @@ useEffect(() => {
                     >
                       {card.tried ? 'Completed' : 'Try Now'}
                     </button>
+                 
                   </div>
                 </div>
+         
               </div>
+              
+              
             );
+            
           })}
+               
+       
         </div>
 
         {/* Navigation */}
@@ -342,13 +351,13 @@ useEffect(() => {
        
 
         {/* Add New Card Button */}
+      
         <button
-          onClick={() => setShowAddCard(true)}
-          className="fixed bottom-6 right-6 bg-blue-500 text-white p-3 rounded-full shadow-lg"
-        >
-          <Plus className="w-6 h-6" />
-        </button>
-
+  onClick={() => setShowAddCard(true)}
+  className="absolute bottom-6 right-6 bg-blue-500 text-white p-3 rounded-full shadow-lg"
+>
+  <Plus className="w-6 h-6" />
+</button>
         {/* Add Card Modal */}
         {showAddCard && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
@@ -519,13 +528,13 @@ useEffect(() => {
         )}
       </div>
       {/* Reset Button */}
-<button
+      <button
   onClick={() => {
     if (window.confirm('Are you sure you want to reset all cards? This cannot be undone.')) {
       clearStorageAndReset();
     }
   }}
-  className="fixed bottom-6 left-6 bg-gray-500 text-white p-3 rounded-full shadow-lg hover:bg-gray-600"
+  className="absolute bottom-6 left-6 bg-gray-500 text-white p-3 rounded-full shadow-lg hover:bg-gray-600"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -544,6 +553,7 @@ useEffect(() => {
 </button>
 </div>
     </div>
+    </Layout>
   );
 };
 
