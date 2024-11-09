@@ -216,9 +216,9 @@ useEffect(() => {
     setCards([
         {
             id: '1',
-            heading: 'Lecture',
+            heading: 'Lecture1',
             emoji: '📱',
-            description: 'watch it attentively till the end',
+            description: 'watch it attentively till the end ',
             tried: false,
             category: 'Mindfulness'
           },
@@ -227,6 +227,14 @@ useEffect(() => {
             heading: 'Write',
             emoji: '📓',
             description: 'write down through pen your solutions to the problems',
+            tried: false,
+            category: 'Mindfulness'
+          },
+          {
+            id: '4',
+            heading: 'lecture 2',
+            emoji: '📓',
+            description: 'watch it with headphones',
             tried: false,
             category: 'Mindfulness'
           },
@@ -309,7 +317,9 @@ useEffect(() => {
                     <span className="inline-block bg-gray-800 rounded-full px-3 py-1 text-sm text-white mb-4">
                       {card.category}
                     </span>
+                    
                   )}
+                  <p className='text-white'> one life, one cycle ,uncertainity in every moment, so dont die of ignorance, at least try, at least take the first step,rest will be non regretfull history </p>
                   {card.completedAt && (
                     <p className="text-sm text-white mb-4">
                       Completed: {new Date(card.completedAt).toLocaleDateString()}
@@ -327,7 +337,7 @@ useEffect(() => {
                     >
                       {card.tried ? 'Tried' : ' Have you tried it mate ??'}
                     </button>
-                    <p className='text-white'> dont procastinate dont be a bitch just try at least try you will never regret and you dont have to if you just tried just take the first physical body movement towards it as it is the hardest its just game interpreted by mind say every physcicality is fake as you end with the mind</p>
+                    
                  
                   </div>
                 </div>
