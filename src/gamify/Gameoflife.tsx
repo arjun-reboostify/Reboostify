@@ -245,8 +245,9 @@ useEffect(() => {
 
   return (
     <Layout title='Gameoflife'>
-<div className="relative min-h-screen bg-black p-4 overflow-hidden">
-<div className="max-w-md h-screen mx-auto flex flex-col">
+<div className="relative h-[120vh] bg-black p-4 overflow-hidden">
+  <div className="max-w-md h-[110vh] mx-auto flex flex-col">
+
         {/* Category Filter */}
         <div className="mb-6 flex gap-2 overflow-x-auto pb-2">
           <button
@@ -314,6 +315,7 @@ useEffect(() => {
                       Completed: {new Date(card.completedAt).toLocaleDateString()}
                     </p>
                   )}
+                 
                   <div className="flex gap-4">
                     <button
                       onClick={() => toggleTried(card.id)}
@@ -323,8 +325,9 @@ useEffect(() => {
                           : 'bg-black text-white'
                       }`}
                     >
-                      {card.tried ? 'Tried' : 'Have you tried it mate ??'}
+                      {card.tried ? 'Tried' : ' Have you tried it mate ??'}
                     </button>
+                    <p className='text-white'> dont procastinate dont be a bitch just try at least try you will never regret and you dont have to if you just tried just take the first physical body movement towards it as it is the hardest its just game interpreted by mind say every physcicality is fake as you end with the mind</p>
                  
                   </div>
                 </div>
