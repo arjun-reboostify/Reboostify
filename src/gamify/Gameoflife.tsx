@@ -32,20 +32,28 @@ const SwipeableCards = () => {
   const [cards, setCards] = useState<Card[]>([
     {
       id: '1',
-      heading: 'Morning Meditation',
-      emoji: '🧘',
-      description: 'Start your day with 10 minutes of mindful meditation',
+      heading: 'Lecture',
+      emoji: '📱',
+      description: 'watch it attentively till the end',
       tried: false,
       category: 'Mindfulness'
     },
     {
       id: '2',
-      heading: 'Gratitude Journal',
+      heading: 'Write',
       emoji: '📓',
-      description: 'Write down three things you are grateful for today',
+      description: 'write down through pen your solutions to the problems',
       tried: false,
       category: 'Mindfulness'
-    }
+    },
+    {
+        id: '3',
+        heading: 'Construct',
+        emoji: '📓',
+        description: 'using various tools construct yourself various designs ',
+        tried: false,
+        category: 'Mindfulness'
+      }
   ]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -229,7 +237,7 @@ useEffect(() => {
 
   return (
     <Layout title='Gameoflife'>
-<div className="relative min-h-screen bg-gray-100 p-4 overflow-hidden">
+<div className="relative min-h-screen bg-black p-4 overflow-hidden">
 <div className="max-w-md h-screen mx-auto flex flex-col">
         {/* Category Filter */}
         <div className="mb-6 flex gap-2 overflow-x-auto pb-2">
@@ -273,9 +281,9 @@ useEffect(() => {
                 onMouseUp={handleTouchEnd}
                 onMouseLeave={handleTouchEnd}
               >
-                <div className="bg-white rounded-lg shadow-xl p-6 h-full">
+                <div className="bg-gray-900 rounded-lg shadow-xl p-6">
                   <div className="flex justify-between items-start mb-4">
-                    <h2 className="text-2xl font-bold">{card.heading}</h2>
+                    <h2 className="text-2xl text-white font-bold">{card.heading}</h2>
                     <button
                       onClick={() => setShowDeleteConfirm(true)}
                       className="text-gray-400 hover:text-red-500"
@@ -283,17 +291,18 @@ useEffect(() => {
                       <Trash2 className="w-5 h-5" />
                     </button>
                   </div>
-                  <div className="w-24 h-24 mx-auto mb-4 bg-gray-100 rounded-lg flex items-center justify-center">
-                    <span className="text-4xl">{card.emoji}</span>
+                  <div className="w-50 h-90 mx-auto mb-4 bg-black rounded-lg flex items-center justify-center">
+                  <span className="text-[15rem]">{card.emoji}</span>
+
                   </div>
-                  <p className="text-gray-600 mb-6">{card.description}</p>
+                  <p className="text-white mb-6">{card.description}</p>
                   {card.category && (
-                    <span className="inline-block bg-gray-100 rounded-full px-3 py-1 text-sm text-gray-600 mb-4">
+                    <span className="inline-block bg-gray-800 rounded-full px-3 py-1 text-sm text-white mb-4">
                       {card.category}
                     </span>
                   )}
                   {card.completedAt && (
-                    <p className="text-sm text-gray-500 mb-4">
+                    <p className="text-sm text-white mb-4">
                       Completed: {new Date(card.completedAt).toLocaleDateString()}
                     </p>
                   )}
@@ -303,10 +312,10 @@ useEffect(() => {
                       className={`flex-1 py-2 px-4 rounded-lg ${
                         card.tried 
                           ? 'bg-green-500 text-white' 
-                          : 'bg-gray-200 text-gray-700'
+                          : 'bg-black text-white'
                       }`}
                     >
-                      {card.tried ? 'Completed' : 'Try Now'}
+                      {card.tried ? 'Tried' : 'Have you tried it mate ??'}
                     </button>
                  
                   </div>
