@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { X, Plus, Quote, Search, ChevronLeft, ChevronRight, Save, Trash2 } from 'lucide-react';
 import { Layout } from '../components/layout/Layout/Layout';
+import A from '../it/img/08e7afa211903fbb15f36d9bf9fc166fb52e4ad74b3c9b9bf4ea35a52d513674.webp'
+import B from '../it/img/1326cb3e-be11-4ab7-afdf-ab82bdcc0801.webp'
 
 
 interface Card {
@@ -103,20 +105,26 @@ const SwipeableCards = () => {
 
   const stoicQuotes: Quote[] = [
     {
-      text: "The happiness of your life depends upon the quality of your thoughts.",
-      image: "/api/placeholder/400/300",
-      author: "Marcus Aurelius"
+      text: "I need you to push a little bit more hard to get me",
+      image: A,
+      author: "Futuriora"
     },
     {
-      text: "Waste no more time arguing about what a good person should be. Be one.",
-      image: "/api/placeholder/400/300",
-      author: "Marcus Aurelius"
+      text: "I need you to push a little bit more hard to get me",
+      image: B,
+      author: "Futuriora"
     },
     {
-      text: "He who fears death will never do anything worthy of a living man.",
-      image: "/api/placeholder/400/300",
-      author: "Seneca"
-    }
+      text: "I need you to push a little bit more hard to get me",
+      image: A,
+      author: "Futuriora"
+    },
+    {
+      text: "I need you to push a little bit more hard to get me",
+      image: A,
+      author: "Futuriora"
+    },
+   
   ];
 
   // Touch handlers (same as before)
