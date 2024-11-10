@@ -58,7 +58,10 @@ export const Sidebar = () => {
                     </span>
                     <nav>
           
-                   
+                    <Link to='/Cam'>
+                            <img src={monitoring} alt='Cam' />
+                            <span>Webcam</span>
+                        </Link>
                     <Link to='/Road'>
                             <img src={monitoring} alt='Road' />
                             <span>PathYours</span>
@@ -110,6 +113,15 @@ export const Sidebar = () => {
                         <Link to='/Note'>
                             <img src={monitoring} alt='Note' />
                             <span>Note</span>
+                        </Link>
+                        
+                        <Link to='/Fit'>
+                            <img src={monitoring} alt='Fit' />
+                            <span>Fitness</span>
+                        </Link>
+                        <Link to='/Fit'>
+                            <img src={monitoring} alt='Fit' />
+                            <span>Fitness</span>
                         </Link>
 
                     
