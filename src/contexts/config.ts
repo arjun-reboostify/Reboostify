@@ -33,3 +33,28 @@ export const auth = getAuth(app);
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
+const googleProvider = new GoogleAuthProvider();
+export const googleAuthorize = async () => {
+    try {
+        const res = await signInWithPopup(auth, googleProvider);
+        const user = res.user;
+        const q = query(collection(db, "User"), where("uid", "==", user.uid));
+        const docs = await getDocs(q);
+        if (docs.docs.length === 0) {
+            await setDoc(doc(db, "User", user.uid), {
+                name: user.displayName,
+                authProvider: "google",
+                email: user.email,
+                isSetup: false,
+                uid: user.uid,
+                color: "red",
+            });
+        }
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+export async function reauthWithGoogle(user: User) {
+    return await reauthenticateWithPopup(user, googleProvider);
+}

@@ -4,16 +4,33 @@ import styles from './Home.module.scss'
 //components
 import { Login } from './Login'
 import { Register } from './Register'
+
 import Hope from '../../it/hope'
 import Ch from '../../it/chance'
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth, googleAuthorize} from '../../contexts/config';
+import { useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
 
 
 
 export const Home = () => {
+  const navigate = useNavigate();
     const [isSignupOpen, setIsSignupOpen] = useState(false)
     const [isLoginOpen, setIsLoginOpen] = useState(false)
     const [isBlogOpen, setIsBlogOpen] = useState(false);
+    const [user, loading] = useAuthState(auth)
     const [isBlgOpen, setIsBlgOpen] = useState(false);
+    useEffect(() => {
+      if (loading) return;
+      if (user) {
+          navigate("/");  // First, navigate to the desired route
+          window.location.reload();  // Then, reload the page
+      }
+  }, [user, loading]);
+  
+  
 
     const handleClosingForms = () => {
         setIsSignupOpen(false)
@@ -65,6 +82,14 @@ export const Home = () => {
                     </p>
                     <button className={styles.signupBtn} onClick={() => { setIsSignupOpen(true); setIsBlogOpen(true); }}>Sign Up</button>
                     <button className={styles.loginBtn} onClick={() => { setIsLoginOpen(true); setIsBlgOpen(true); }}>Log In</button>
+                    <button
+                    type="button"
+                    className="bg-b-tertiary text-black drop-shadow-md py-2 rounded-md flex flex-row justify-center items-center"
+                    onClick={() => googleAuthorize()}
+                >
+                    
+                    <p>Register with Google</p>
+                </button>
                 </>}
                 {isSignupOpen &&
                     <Register handleClosingForms={handleClosingForms} />

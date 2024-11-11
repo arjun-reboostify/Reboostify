@@ -6,6 +6,7 @@ import arrowback from '../../assets/icons/arrowback.svg'
 //styles
 import styles from './Home.module.scss'
 
+
 interface RegisterProps {
     handleClosingForms: MouseEventHandler<HTMLButtonElement>
 }
